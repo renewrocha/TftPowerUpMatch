@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TFT Powerup Optimizer</title>
+  <style>
+    body { 
+      font-family: 'Segoe UI', Arial, sans-serif; 
+      padding: 20px; 
+      max-width: 900px; 
+      margin: auto; 
+      line-height: 1.6;
+      color: #333;
+    }
+    h2 { 
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .container {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    label { 
+      margin: 15px 0 5px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    select, input, button { 
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+      padding: 12px;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    button:disabled {
+      background-color: #95a5a6;
+      cursor: not-allowed;
+    }
+    ul { 
+      padding-left: 20px;
+      list-style-type: none;
+    }
+    li { 
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: white;
+      border-radius: 4px;
+      border-left: 4px solid #3498db;
+    }
+    .loading {
+      text-align: center;
+      color: #7f8c8d;
+      font-style: italic;
+    }
+    .error {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+    .success {
+      color: #27ae60;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #e67e22;
+    }
+    .powerup-info {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #e8f4fc;
+      border-radius: 4px;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>TFT Powerup Optimizer</h2>
+
+    <label for="langSelect">Idioma / Language:</label>
+    <select id="langSelect">
+      <option value="pt">Português</option>
+      <option value="en">English</option>
+    </select>
+
+    <label for="championSelect">Champion:</label>
+    <select id="championSelect" disabled>
+      <option value="">Carregando campeões...</option>
+    </select>
+
+    <label for="powerupSelect">Powerup:</label>
+    <select id="powerupSelect" disabled>
+      <option value="">Selecione um campeão primeiro</option>
+    </select>
+
+    <button id="analyzeBtn" onclick="analisar()" disabled>Analisar</button>
+
+    <div class="powerup-info" id="powerupInfo" style="display: none;">
+      <h3>Informações sobre a fruta selecionada:</h3>
+      <p id="powerupDescription"></p>
+    </div>
+
+    <h3>Melhores campeões para usar antes:</h3>
+    <ul id="resultList">
+      <li class="loading">Selecione um campeão e uma fruta para análise</li>
+    </ul>
+  </div>
+
+  <script>
+    let data = [];
+    let currentLanguage = 'pt';
+    let championData = {}; // Para armazenar informações adicionais dos campeões
+
+    const champSelect = document.getElementById("championSelect");
+    const powerupSelect = document.getElementById("powerupSelect");
+    const resultList = document.getElementById("resultList");
+    const langSelect = document.getElementById("langSelect");
+    const analyzeBtn = document.getElementById("analyzeBtn");
+    const powerupInfo = document.getElementById("powerupInfo");
+    const powerupDescription = document.getElementById("powerupDescription");
+
+    // Dicionário de descrições de frutas (poderia ser carregado do JSON)
+    const powerupDescriptions = {
+      'pt': {
+        'Fruta do Atirador': 'Aumenta o alcance e o dano de ataques básicos.',
+        'Fruta do Tanque': 'Concede bônus de vida e resistência.',
+        // Adicione mais descrições conforme necessário
+      },
+      'en': {
+        'Marksman Fruit': 'Increases attack range and basic attack damage.',
+        'Tank Fruit': 'Grants bonus health and resistance.',
+        // Add more descriptions as needed
+      }
+    };
+
+    function getDataPath() {
+      return `./tft_powerups_${currentLanguage}.json?${new Date().getTime()}`;
+    }
+
+    function showLoading() {
+      resultList.innerHTML = '<li class="loading">Carregando dados...</li>';
+    }
+
+    function showError(message) {
+      resultList.innerHTML = `<li class="error">${message}</li>`;
+    }
+
+    async function carregarDados() {
+      showLoading();
+      currentLanguage = langSelect.value;
+      
+      try {
+        const response = await fetch(getDataPath());
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        
+        const loadedData = await response.json();
+        data = loadedData;
+        
+        // Criar um objeto mais fácil de pesquisar
+        championData = {};
+        data.forEach(entry => {
+          championData[entry.champion] = {
+            powerups: entry.powerups,
+            // Podemos adicionar mais propriedades aqui se necessário
+          };
+        });
+        
+        preencherCampeoes();
+      } catch (error) {
+        console.error("Erro ao carregar o arquivo:", error);
+        showError(currentLanguage === 'pt' 
+          ? "Erro ao carregar os dados. Por favor, tente recarregar a página." 
+          : "Error loading data. Please try reloading the page.");
+      }
+    }
+
+    function preencherCampeoes() {
+      champSelect.innerHTML = "";
+      
+      // Ordenar campeões alfabeticamente
+      const sortedChampions = [...data].sort((a, b) => a.champion.localeCompare(b.champion));
+      
+      sortedChampions.forEach(entry => {
+        const opt = document.createElement("option");
+        opt.value = entry.champion;
+        opt.textContent = entry.champion;
+        champSelect.appendChild(opt);
+      });
+      
+      champSelect.disabled = false;
+      if (data.length > 0) {
+        champSelect.selectedIndex = 0;
+        atualizarFrutas();
+      }
+    }
+
+    function atualizarFrutas() {
+      const selectedChampion = champSelect.value;
+      const champion = championData[selectedChampion];
+      
+      powerupSelect.innerHTML = "";
+      
+      if (champion) {
+        // Ordenar frutas alfabeticamente
+        const sortedPowerups = [...champion.powerups].sort((a, b) => a.localeCompare(b));
+        
+        sortedPowerups.forEach(p => {
+          const opt = document.createElement("option");
+          opt.value = p;
+          opt.textContent = p;
+          powerupSelect.appendChild(opt);
+        });
+        
+        powerupSelect.disabled = false;
+        analyzeBtn.disabled = false;
+        
+        // Atualizar informações quando uma nova fruta é selecionada
+        powerupSelect.addEventListener('change', updatePowerupInfo);
+        updatePowerupInfo();
+      } else {
+        powerupSelect.disabled = true;
+        analyzeBtn.disabled = true;
+      }
+    }
+
+    function updatePowerupInfo() {
+      const selectedPowerup = powerupSelect.value;
+      
+      if (selectedPowerup && powerupDescriptions[currentLanguage] && powerupDescriptions[currentLanguage][selectedPowerup]) {
+        powerupDescription.textContent = powerupDescriptions[currentLanguage][selectedPowerup];
+        powerupInfo.style.display = 'block';
+      } else {
+        powerupInfo.style.display = 'none';
+      }
+    }
+
+    function analisar() {
+      if (data.length === 0) {
+        showError(currentLanguage === 'pt' 
+          ? "Dados ainda não carregados. Aguarde." 
+          : "Data not loaded yet. Please wait.");
+        return;
+      }
+
+      const alvoNome = champSelect.value;
+      const frutaDesejada = powerupSelect.value.trim().toLowerCase();
+      const alvo = championData[alvoNome];
+      
+      if (!alvo || !frutaDesejada) {
+        showError(currentLanguage === 'pt' 
+          ? "Por favor, preencha todos os campos corretamente." 
+          : "Please fill all fields correctly.");
+        return;
+      }
+
+      const poolAlvo = new Set(alvo.powerups.map(p => p.toLowerCase()));
+      
+      if (!poolAlvo.has(frutaDesejada)) {
+        showError(currentLanguage === 'pt' 
+          ? `⚠️ O campeão ${alvoNome} não possui a fruta "${powerupSelect.value}".` 
+          : `⚠️ Champion ${alvoNome} doesn't have the "${powerupSelect.value}" powerup.`);
+        return;
+      }
+
+      // Mostrar loading durante o processamento
+      resultList.innerHTML = '<li class="loading">Analisando combinações...</li>';
+      
+      // Usar setTimeout para permitir que a UI atualize antes do processamento pesado
+      setTimeout(() => {
+        const candidatos = data
+          .filter(c => c.champion !== alvoNome)
+          .map(c => {
+            const comum = c.powerups.filter(p => poolAlvo.has(p.toLowerCase()));
+            const possuiFruta = c.powerups.some(p => p.toLowerCase() === frutaDesejada);
+            return {
+              nome: c.champion,
+              comuns: comum,
+              exclui: comum.length,
+              temFrutaDesejada: possuiFruta
+            };
+          })
+          .filter(c => !c.temFrutaDesejada && c.exclui > 0)
+          .sort((a, b) => b.exclui - a.exclui || a.nome.localeCompare(b.nome));
+
+        exibirResultados(candidatos, alvoNome, powerupSelect.value);
+      }, 50);
+    }
+
+    function exibirResultados(candidatos, alvoNome, frutaDesejada) {
+      resultList.innerHTML = "";
+      
+      if (candidatos.length === 0) {
+        showError(currentLanguage === 'pt' 
+          ? `Nenhum campeão encontrado que exclua frutas em comum com ${alvoNome} sem ter "${frutaDesejada}".` 
+          : `No champions found that exclude common powerups with ${alvoNome} without having "${frutaDesejada}".`);
+        return;
+      }
+
+      const header = document.createElement('li');
+      header.innerHTML = currentLanguage === 'pt' 
+        ? `<span class="highlight">Resultados para ${alvoNome} com "${frutaDesejada}":</span>` 
+        : `<span class="highlight">Results for ${alvoNome} with "${frutaDesejada}":</span>`;
+      resultList.appendChild(header);
+
+      candidatos.forEach(c => {
+        const li = document.createElement("li");
+        li.innerHTML = currentLanguage === 'pt' 
+          ? `<strong>${c.nome}</strong> (exclui ${c.exclui} frutas: ${c.comuns.join(", ")})` 
+          : `<strong>${c.nome}</strong> (excludes ${c.exclui} powerups: ${c.comuns.join(", ")})`;
+        resultList.appendChild(li);
+      });
+    }
+
+    // Event listeners
+    langSelect.addEventListener("change", carregarDados);
+    champSelect.addEventListener("change", atualizarFrutas);
+    
+    // Adicionar debounce para evitar múltiplas chamadas rápidas
+    let debounceTimer;
+    function debounce(func, delay) {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(func, delay);
+    }
+    
+    // Carregamento inicial
+    document.addEventListener('DOMContentLoaded', () => {
+      carregarDados();
+      
+      // Adicionar debounce para eventos que podem disparar muitas vezes
+      champSelect.addEventListener('input', () => debounce(atualizarFrutas, 300));
+    });
+  </script>
+</body>
+</html>
