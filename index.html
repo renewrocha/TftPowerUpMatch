@@ -4,25 +4,61 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TFT Powerup Optimizer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body { 
       font-family: 'Segoe UI', Arial, sans-serif; 
       padding: 20px; 
-      max-width: 900px; 
+      max-width: 1200px; 
       margin: auto; 
       line-height: 1.6;
       color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
     h2 { 
       color: #2c3e50;
       text-align: center;
+      margin-bottom: 10px;
+    }
+    .credits {
+      text-align: center;
+      font-size: 12px;
+      color: #7f8c8d;
       margin-bottom: 25px;
+    }
+    .main-content {
+      display: flex;
+      gap: 20px;
+      flex: 1;
     }
     .container {
       background-color: #f9f9f9;
       border-radius: 8px;
       padding: 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      flex: 2;
+    }
+    .sidebar {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .info-panel {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .favorites-panel {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      max-height: 500px;
+      overflow-y: auto;
     }
     label { 
       margin: 15px 0 5px;
@@ -56,7 +92,7 @@
       cursor: not-allowed;
     }
     ul { 
-      padding-left: 20px;
+      padding-left: 0;
       list-style-type: none;
     }
     li { 
@@ -65,6 +101,28 @@
       background-color: white;
       border-radius: 4px;
       border-left: 4px solid #3498db;
+    }
+    .champion-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .favorite-btn {
+      background: none;
+      border: none;
+      color: #ccc;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 5px;
+      margin-left: auto;
+      transition: color 0.3s;
+    }
+    .favorite-btn:hover {
+      color: #ff6b6b;
+    }
+    .favorite-btn.favorited {
+      color: #ff6b6b;
     }
     .loading {
       text-align: center;
@@ -84,57 +142,205 @@
     }
     .powerup-info {
       margin-top: 20px;
+    }
+    .powerup-info h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    .powerup-description {
       padding: 15px;
       background-color: #e8f4fc;
       border-radius: 4px;
     }
-    @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
-      .container {
-        padding: 15px;
-      }
+    .favorite-group {
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
     }
+    .favorite-group-header {
+      background-color: #3498db;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .favorite-group-header-content {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .favorite-group-header strong,
+    .favorite-group-header span {
+      line-height: 1;
+      vertical-align: baseline;
+    }
+    .favorite-group-content {
+      padding: 10px;
+      background-color: white;
+    }
+    .favorite-group-item {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+    }
+    .favorite-group-item:last-child {
+      border-bottom: none;
+    }
+    .group-remove-btn {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin-left: 10px;
+      padding: 0 5px;
+    }
+    .item-remove-btn {
+      background: none;
+      border: none;
+      color: #e74c3c;
+      cursor: pointer;
+      margin-left: auto;
+      padding: 2px 5px;
+    }
+    .favorites-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .clear-favorites {
+      background: none;
+      border: none;
+      color: #e74c3c;
+      cursor: pointer;
+      font-size: 14px;
+    }
+ @media (max-width: 1024px) {
+  .main-content {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .container,
+  .sidebar {
+    flex: unset;
+    width: 100%;
+  }
+
+  .container {
+    order: 1;
+  }
+
+  .sidebar {
+    order: 2;
+  }
+
+  .favorites-panel,
+  .info-panel {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  label,
+  select,
+  input,
+  button {
+    font-size: 15px;
+  }
+
+  .champion-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .favorite-btn {
+    font-size: 16px;
+  }
+
+  .favorite-group-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .favorite-group-item {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>TFT Powerup Optimizer</h2>
+  <h2>TFT Powerup Optimizer</h2>
+  <div class="credits">by decarstes</div>
 
-    <label for="langSelect">Idioma / Language:</label>
-    <select id="langSelect">
-      <option value="pt">Português</option>
-      <option value="en">English</option>
-    </select>
+  <div class="main-content">
+    <div class="container">
+      <label for="langSelect">Idioma / Language:</label>
+      <select id="langSelect">
+        <option value="pt">Português</option>
+        <option value="en">English</option>
+      </select>
 
-    <label for="championSelect">Champion:</label>
-    <select id="championSelect" disabled>
-      <option value="">Carregando campeões...</option>
-    </select>
+      <label for="championSelect">Champion:</label>
+      <select id="championSelect" disabled>
+        <option value="">Loading champions...</option>
+      </select>
 
-    <label for="powerupSelect">Powerup:</label>
-    <select id="powerupSelect" disabled>
-      <option value="">Selecione um campeão primeiro</option>
-    </select>
+      <label for="powerupSelect">Powerup:</label>
+      <select id="powerupSelect" disabled>
+        <option value="">Select a champion first</option>
+      </select>
 
-    <button id="analyzeBtn" onclick="analisar()" disabled>Analisar</button>
+      <button id="analyzeBtn" onclick="analisar()" disabled>Analyze</button>
 
-    <div class="powerup-info" id="powerupInfo" style="display: none;">
-      <h3>Informações sobre a fruta selecionada:</h3>
-      <p id="powerupDescription"></p>
+      <h3>Best champions to use before:</h3>
+      <ul id="resultList">
+        <li class="loading">Select a champion and powerup to analyze</li>
+      </ul>
     </div>
 
-    <h3>Melhores campeões para usar antes:</h3>
-    <ul id="resultList">
-      <li class="loading">Selecione um campeão e uma fruta para análise</li>
-    </ul>
+    <div class="sidebar">
+      <div class="info-panel">
+        <h3>Powerup Information</h3>
+        <div class="powerup-info" id="powerupInfo" style="display: none;">
+          <h4 id="powerupName"></h4>
+          <div class="powerup-description" id="powerupDescription"></div>
+        </div>
+      </div>
+
+      <div class="favorites-panel">
+        <div class="favorites-title">
+          <h3>Favorites <i class="fas fa-heart" style="color: #ff6b6b;"></i></h3>
+          <button class="clear-favorites" onclick="clearFavorites()">Clear All</button>
+        </div>
+        <ul id="favoritesList">
+          <li class="loading">No favorites yet</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <script>
     let data = [];
     let currentLanguage = 'pt';
-    let championData = {}; // Para armazenar informações adicionais dos campeões
+    let championData = {};
+    let powerupDescriptions = {};
+    let favorites = JSON.parse(localStorage.getItem('tft_favorites')) || [];
 
     const champSelect = document.getElementById("championSelect");
     const powerupSelect = document.getElementById("powerupSelect");
@@ -142,28 +348,26 @@
     const langSelect = document.getElementById("langSelect");
     const analyzeBtn = document.getElementById("analyzeBtn");
     const powerupInfo = document.getElementById("powerupInfo");
+    const powerupName = document.getElementById("powerupName");
     const powerupDescription = document.getElementById("powerupDescription");
+    const favoritesList = document.getElementById("favoritesList");
 
-    // Dicionário de descrições de frutas (poderia ser carregado do JSON)
-    const powerupDescriptions = {
-      'pt': {
-        'Fruta do Atirador': 'Aumenta o alcance e o dano de ataques básicos.',
-        'Fruta do Tanque': 'Concede bônus de vida e resistência.',
-        // Adicione mais descrições conforme necessário
-      },
-      'en': {
-        'Marksman Fruit': 'Increases attack range and basic attack damage.',
-        'Tank Fruit': 'Grants bonus health and resistance.',
-        // Add more descriptions as needed
-      }
-    };
+    function formatChampionNameForIcon(championName) {
+      return championName
+        .toLowerCase()
+        .replace(/'/g, '')
+        .replace(/\./g, '')
+        .replace(/\s+/g, '')
+        .replace(/[^a-z0-9]/g, '');
+    }
 
-    function getDataPath() {
-      return `./tft_powerups_${currentLanguage}.json?${new Date().getTime()}`;
+    function getChampionIcon(championName) {
+      const formattedName = formatChampionNameForIcon(championName);
+      return `https://cdn.metatft.com/cdn-cgi/image/width=48,height=48,format=auto/https://cdn.metatft.com/file/metatft/champions/tft15_${formattedName}.png`;
     }
 
     function showLoading() {
-      resultList.innerHTML = '<li class="loading">Carregando dados...</li>';
+      resultList.innerHTML = '<li class="loading">Loading data...</li>';
     }
 
     function showError(message) {
@@ -175,24 +379,39 @@
       currentLanguage = langSelect.value;
       
       try {
-        const response = await fetch(getDataPath());
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const [championsResponse, descriptionsResponse] = await Promise.all([
+          fetch(`./tft_powerups_${currentLanguage}.json?${new Date().getTime()}`),
+          fetch(`./tft_powerup_desc_${currentLanguage}.json?${new Date().getTime()}`)
+        ]);
         
-        const loadedData = await response.json();
+        if (!championsResponse.ok) throw new Error(`HTTP error! status: ${championsResponse.status}`);
+        if (!descriptionsResponse.ok) throw new Error(`HTTP error! status: ${descriptionsResponse.status}`);
+        
+        const [loadedData, loadedDescriptions] = await Promise.all([
+          championsResponse.json(),
+          descriptionsResponse.json()
+        ]);
+        
         data = loadedData;
+        powerupDescriptions = {};
         
-        // Criar um objeto mais fácil de pesquisar
+        loadedDescriptions.forEach(desc => {
+          powerupDescriptions[desc.nome || desc.name] = {
+            description: desc.descricao || desc.description
+          };
+        });
+        
         championData = {};
         data.forEach(entry => {
           championData[entry.champion] = {
             powerups: entry.powerups,
-            // Podemos adicionar mais propriedades aqui se necessário
           };
         });
         
         preencherCampeoes();
+        updateFavoritesList();
       } catch (error) {
-        console.error("Erro ao carregar o arquivo:", error);
+        console.error("Error loading file:", error);
         showError(currentLanguage === 'pt' 
           ? "Erro ao carregar os dados. Por favor, tente recarregar a página." 
           : "Error loading data. Please try reloading the page.");
@@ -202,17 +421,26 @@
     function preencherCampeoes() {
       champSelect.innerHTML = "";
       
-      // Ordenar campeões alfabeticamente
       const sortedChampions = [...data].sort((a, b) => a.champion.localeCompare(b.champion));
       
       sortedChampions.forEach(entry => {
         const opt = document.createElement("option");
         opt.value = entry.champion;
-        opt.textContent = entry.champion;
+        
+        const iconUrl = getChampionIcon(entry.champion);
+        opt.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <img src="${iconUrl}" alt="${entry.champion}" style="width: 20px; height: 20px; border-radius: 50%;">
+            ${entry.champion}
+          </div>
+        `;
+        
         champSelect.appendChild(opt);
       });
       
       champSelect.disabled = false;
+      analyzeBtn.textContent = currentLanguage === 'pt' ? 'Analisar' : 'Analyze';
+      
       if (data.length > 0) {
         champSelect.selectedIndex = 0;
         atualizarFrutas();
@@ -226,7 +454,6 @@
       powerupSelect.innerHTML = "";
       
       if (champion) {
-        // Ordenar frutas alfabeticamente
         const sortedPowerups = [...champion.powerups].sort((a, b) => a.localeCompare(b));
         
         sortedPowerups.forEach(p => {
@@ -238,9 +465,6 @@
         
         powerupSelect.disabled = false;
         analyzeBtn.disabled = false;
-        
-        // Atualizar informações quando uma nova fruta é selecionada
-        powerupSelect.addEventListener('change', updatePowerupInfo);
         updatePowerupInfo();
       } else {
         powerupSelect.disabled = true;
@@ -251,12 +475,176 @@
     function updatePowerupInfo() {
       const selectedPowerup = powerupSelect.value;
       
-      if (selectedPowerup && powerupDescriptions[currentLanguage] && powerupDescriptions[currentLanguage][selectedPowerup]) {
-        powerupDescription.textContent = powerupDescriptions[currentLanguage][selectedPowerup];
+      if (selectedPowerup && powerupDescriptions[selectedPowerup]) {
+        powerupName.textContent = selectedPowerup;
+        powerupDescription.textContent = powerupDescriptions[selectedPowerup].description;
         powerupInfo.style.display = 'block';
       } else {
         powerupInfo.style.display = 'none';
       }
+    }
+
+    function toggleFavorite(targetChampion, powerup, recommendedChampion) {
+      const existingIndex = favorites.findIndex(fav => 
+        fav.target === targetChampion && 
+        fav.powerup === powerup && 
+        fav.recommended === recommendedChampion
+      );
+      
+      if (existingIndex === -1) {
+        favorites.push({
+          target: targetChampion,
+          powerup: powerup,
+          recommended: recommendedChampion,
+          timestamp: new Date().getTime()
+        });
+      } else {
+        favorites.splice(existingIndex, 1);
+      }
+      
+      favorites.sort((a, b) => b.timestamp - a.timestamp);
+      
+      localStorage.setItem('tft_favorites', JSON.stringify(favorites));
+      updateFavoritesList();
+      updateFavoriteButtons(targetChampion, powerup);
+    }
+
+    function clearFavorites() {
+      if (confirm(currentLanguage === 'pt' 
+          ? "Tem certeza que deseja limpar todos os favoritos?" 
+          : "Are you sure you want to clear all favorites?")) {
+        favorites = [];
+        localStorage.setItem('tft_favorites', JSON.stringify(favorites));
+        updateFavoritesList();
+      }
+    }
+
+    function loadFavoriteCombo(favorite) {
+      champSelect.value = favorite.target;
+      champSelect.dispatchEvent(new Event('change'));
+      
+      setTimeout(() => {
+        powerupSelect.value = favorite.powerup;
+        powerupSelect.dispatchEvent(new Event('change'));
+        analisar();
+      }, 100);
+    }
+
+    function updateFavoritesList() {
+      favoritesList.innerHTML = "";
+      
+      if (favorites.length === 0) {
+        favoritesList.innerHTML = `<li class="loading">${
+          currentLanguage === 'pt' 
+            ? "Nenhum favorito ainda" 
+            : "No favorites yet"
+        }</li>`;
+        return;
+      }
+
+      const groupedFavorites = {};
+      favorites.forEach(fav => {
+        const key = `${fav.target}|${fav.powerup}`;
+        if (!groupedFavorites[key]) {
+          groupedFavorites[key] = {
+            target: fav.target,
+            powerup: fav.powerup,
+            items: []
+          };
+        }
+        groupedFavorites[key].items.push(fav);
+      });
+
+      const sortedGroups = Object.values(groupedFavorites)
+        .sort((a, b) => {
+          const aLatest = Math.max(...a.items.map(i => i.timestamp));
+          const bLatest = Math.max(...b.items.map(i => i.timestamp));
+          return bLatest - aLatest;
+        });
+
+      sortedGroups.forEach(group => {
+        const groupElement = document.createElement('div');
+        groupElement.className = 'favorite-group';
+        
+        const targetIcon = getChampionIcon(group.target);
+        
+        groupElement.innerHTML = `
+          <div class="favorite-group-header">
+            <div class="favorite-group-header-content">
+              <img src="${targetIcon}" alt="${group.target}" style="width: 20px; height: 20px; border-radius: 50%;">
+              <strong>${group.target}</strong>
+              <span>+ ${group.powerup}</span>
+            </div>
+            <button class="group-remove-btn" onclick="removeFavoriteGroup('${group.target.replace(/'/g, "\\'")}', '${group.powerup.replace(/'/g, "\\'")}')">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+          <div class="favorite-group-content" id="group-${group.target}-${group.powerup}">
+          </div>
+        `;
+        
+        favoritesList.appendChild(groupElement);
+        
+        const groupContent = document.getElementById(`group-${group.target}-${group.powerup}`);
+        group.items.forEach(fav => {
+          const itemElement = document.createElement('div');
+          itemElement.className = 'favorite-group-item';
+          
+          const recommendedIcon = getChampionIcon(fav.recommended);
+          
+          itemElement.innerHTML = `
+            <img src="${recommendedIcon}" alt="${fav.recommended}" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 8px;">
+            <span>${fav.recommended}</span>
+            <button class="item-remove-btn" onclick="removeFavoriteItem(event, '${fav.target.replace(/'/g, "\\'")}', '${fav.powerup.replace(/'/g, "\\'")}', '${fav.recommended.replace(/'/g, "\\'")}')">
+              <i class="fas fa-times"></i>
+            </button>
+          `;
+          
+          groupContent.appendChild(itemElement);
+        });
+      });
+    }
+
+    function removeFavoriteGroup(target, powerup) {
+      if (confirm(currentLanguage === 'pt' 
+          ? `Remover todas as recomendações para ${target} + ${powerup}?` 
+          : `Remove all recommendations for ${target} + ${powerup}?`)) {
+        favorites = favorites.filter(fav => 
+          !(fav.target === target && fav.powerup === powerup)
+        );
+        localStorage.setItem('tft_favorites', JSON.stringify(favorites));
+        updateFavoritesList();
+        updateFavoriteButtons(target, powerup);
+      }
+    }
+
+    function removeFavoriteItem(event, target, powerup, recommended) {
+      event.stopPropagation();
+      favorites = favorites.filter(fav => 
+        !(fav.target === target && 
+          fav.powerup === powerup && 
+          fav.recommended === recommended)
+      );
+      localStorage.setItem('tft_favorites', JSON.stringify(favorites));
+      updateFavoritesList();
+      updateFavoriteButtons(target, powerup);
+    }
+
+    function updateFavoriteButtons(targetChampion, powerup) {
+      document.querySelectorAll('.favorite-btn').forEach(btn => {
+        const recommendedChampion = btn.getAttribute('data-champion');
+        const isFavorite = favorites.some(fav => 
+          fav.target === targetChampion && 
+          fav.powerup === powerup && 
+          fav.recommended === recommendedChampion
+        );
+        
+        if (isFavorite) {
+          btn.classList.add('favorited');
+        } else {
+          btn.classList.remove('favorited');
+        }
+      });
     }
 
     function analisar() {
@@ -287,21 +675,27 @@
         return;
       }
 
-      // Mostrar loading durante o processamento
-      resultList.innerHTML = '<li class="loading">Analisando combinações...</li>';
+      resultList.innerHTML = '<li class="loading">Analyzing combinations...</li>';
       
-      // Usar setTimeout para permitir que a UI atualize antes do processamento pesado
       setTimeout(() => {
         const candidatos = data
           .filter(c => c.champion !== alvoNome)
           .map(c => {
             const comum = c.powerups.filter(p => poolAlvo.has(p.toLowerCase()));
             const possuiFruta = c.powerups.some(p => p.toLowerCase() === frutaDesejada);
+            const isFavorite = favorites.some(fav => 
+              fav.target === alvoNome && 
+              fav.powerup === powerupSelect.value && 
+              fav.recommended === c.champion
+            );
+            
             return {
               nome: c.champion,
               comuns: comum,
               exclui: comum.length,
-              temFrutaDesejada: possuiFruta
+              temFrutaDesejada: possuiFruta,
+              icon: getChampionIcon(c.champion),
+              isFavorite: isFavorite
             };
           })
           .filter(c => !c.temFrutaDesejada && c.exclui > 0)
@@ -329,9 +723,22 @@
 
       candidatos.forEach(c => {
         const li = document.createElement("li");
-        li.innerHTML = currentLanguage === 'pt' 
-          ? `<strong>${c.nome}</strong> (exclui ${c.exclui} frutas: ${c.comuns.join(", ")})` 
-          : `<strong>${c.nome}</strong> (excludes ${c.exclui} powerups: ${c.comuns.join(", ")})`;
+        
+        li.innerHTML = `
+          <img src="${c.icon}" alt="${c.nome}" class="champion-icon">
+          <div>
+            <strong>${c.nome}</strong> (${
+              currentLanguage === 'pt' 
+                ? `exclui ${c.exclui} frutas` 
+                : `excludes ${c.exclui} powerups`
+            }: ${c.comuns.join(", ")})
+          </div>
+          <button class="favorite-btn ${c.isFavorite ? 'favorited' : ''}" 
+                  onclick="toggleFavorite('${alvoNome.replace(/'/g, "\\'")}', '${frutaDesejada.replace(/'/g, "\\'")}', '${c.nome.replace(/'/g, "\\'")}')"
+                  data-champion="${c.nome.replace(/'/g, "\\'")}">
+            <i class="fas fa-heart"></i>
+          </button>
+        `;
         resultList.appendChild(li);
       });
     }
@@ -339,21 +746,12 @@
     // Event listeners
     langSelect.addEventListener("change", carregarDados);
     champSelect.addEventListener("change", atualizarFrutas);
-    
-    // Adicionar debounce para evitar múltiplas chamadas rápidas
-    let debounceTimer;
-    function debounce(func, delay) {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(func, delay);
-    }
+    powerupSelect.addEventListener("change", updatePowerupInfo);
     
     // Carregamento inicial
-    document.addEventListener('DOMContentLoaded', () => {
-      carregarDados();
-      
-      // Adicionar debounce para eventos que podem disparar muitas vezes
-      champSelect.addEventListener('input', () => debounce(atualizarFrutas, 300));
-    });
+    document.addEventListener('DOMContentLoaded', carregarDados);
   </script>
 </body>
+</html>
+
 </html>
