@@ -1,0 +1,454 @@
+[
+  {
+    "nome": "Colossal",
+    "descricao": "Ocupa até dois espaços de unidade. Recebe Vida, Durabilidade e Amplificação de Dano.\n\n(1) 1000 ; 20% ; 10% .\n\n(2) 1400 ; 25% ; 30% ."
+  },
+  {
+    "nome": "Corrosivo",
+    "descricao": "Causa 30% de Fragmentação e Fatiamento aos inimigos em até 2 casas adjacentes. Sofre 10% a menos de dano de inimigos sob Fragmentação ou Fatiamento."
+  },
+  {
+    "nome": "Fogo Interior",
+    "descricao": "A cada 2s, aplica Queimadura e Ferimentos ao inimigo sem Queimadura mais próximo por 10s. Sofre 15% a menos de dano de inimigos sob Queimadura."
+  },
+  {
+    "nome": "Independente",
+    "descricao": "Recebe 10% de Durabilidade. Cura-se em 5% do dano causado por todos os outros aliados."
+  },
+  {
+    "nome": "Pele Adaptativa",
+    "descricao": "Ao sofrer dano, recebe 1 de Armadura ou 6 de Resistência Mágica com base no tipo de dano, até 55 de resistência total."
+  },
+  {
+    "nome": "Regenerativo",
+    "descricao": "Cura 6.5% da Vida máxima a cada 3s. Recebe 10% a mais de cura de todas as origens."
+  },
+  {
+    "nome": "Resistente",
+    "descricao": "Reduz cada instância de dano sofrido em 30."
+  },
+  {
+    "nome": "Round Dois",
+    "descricao": "Ao morrer, invoca um Boneco de Treinamento equipado com os mesmos itens. Ele tem 85% da Vida da unidade."
+  },
+  {
+    "nome": "Singularidade",
+    "descricao": "Torna-se uma singularidade de 2 casa(s), causando 1% () como Dano Mágico por segundo. Quando inimigos morrem dentro deste raio, recebe 8 de Vida permanente."
+  },
+  {
+    "nome": "Solitude",
+    "descricao": "Se este Campeão estiver sozinho na fileira no começo do combate, receberá 35% de Vida."
+  },
+  {
+    "nome": "Tanquezilla",
+    "descricao": "Recebe 20% de Vida máxima e fica maior. Depois de 15s, Atordoa todos os inimigos por 1,5s."
+  },
+  {
+    "nome": "Troca de Corpo",
+    "descricao": "No início do combate, se transforma no aliado mais próximo e concede a ele e a este Campeão um Escudo de 30% de Vida."
+  },
+  {
+    "nome": "Vitalidade Máxima",
+    "descricao": "Recebe 35 de Vida permanente no início do combate. A cada 10s que esse Campeão sobrevive, recebe 10 de Vida permanente adicional.\n\n(Atual: X )"
+  },
+  {
+    "nome": "Atômico",
+    "descricao": "Armazena 10% da Vida máxima no início do combate e depois mais 2% por segundo. Ao morrer, causa a Vida armazenada como Dano Mágico em um grande raio de distância."
+  },
+  {
+    "nome": "Casco Espetado",
+    "descricao": "Recebe 40 de Armadura. Inimigos que atacarem este Campeão sofrerão 25 + 5 por Estágio como Dano Físico (Tempo de Recarga: 1s por atacante)."
+  },
+  {
+    "nome": "Herói Faminto",
+    "descricao": "Recebe 100 de Vida e 8% de Dano de Ataque. A cada rodada, você pode pagar 3 de Vida de jogador para receber 75  e 3 ."
+  },
+  {
+    "nome": "Implacável",
+    "descricao": "Recebe 300 de Vida e imunidade a Controle de Grupo. Avança para novos alvos, Atordoando os inimigos atravessados por 1s."
+  },
+  {
+    "nome": "Piloto Mech",
+    "descricao": "(1) Pilota o Mech, concedendo a ele seus atributos: 50% , 100% . O Mech ejetará você quando estiver com 50%.\n\n(2) O Mech se beneficia das características dos pilotos."
+  },
+  {
+    "nome": "Socialite",
+    "descricao": "Início do combate: Marca casas adjacentes por 3 rodadas. Aliados em casas marcadas recebem 12% de Amplificação de Dano e 200 de Vida. Este Campeão recebe 200% do efeito."
+  },
+  {
+    "nome": "Estudante de Destaque",
+    "descricao": "(1) Recebe 200 de Vida e +40% de Potencial \n\n(2) Recebe 1 de EXP por rodada e mais 1 para cada Estudante de Destaque sobrevivente."
+  },
+  {
+    "nome": "Brilhantismo",
+    "descricao": "A cada 1.5s, recebe Poder de Habilidade equivalente a sua Regeneração de Mana."
+  },
+  {
+    "nome": "Elegante",
+    "descricao": "A última característica listada deste Campeão fica 40% mais eficaz nele."
+  },
+  {
+    "nome": "Juntando forças",
+    "descricao": "Ao conjurar, recebe Dano de Ataque cumulativo equivalente a 40% do Mana gasto."
+  },
+  {
+    "nome": "Ameaça Crítica",
+    "descricao": "Habilidades podem causar Acerto Crítico. A cada 3s, recebe 5% de Chance de Acerto Crítico."
+  },
+  {
+    "nome": "Ataque Máximo",
+    "descricao": "Recebe 12% de Dano de Ataque e também 1% permanentemente a cada 2 eliminações. (Atual: X )"
+  },
+  {
+    "nome": "Clone das Sombras",
+    "descricao": "Cria uma cópia perfeita deste Campeão, com os mesmos itens equipados, que causa 25% de dano."
+  },
+  {
+    "nome": "Compartilhar Essência",
+    "descricao": "Ao conjurar, os 2 aliados mais próximos recebem 25% do Mana gasto."
+  },
+  {
+    "nome": "Conto de Fadas",
+    "descricao": "Ao conjurar, faz surgir 2 fadas que causam 80-200 de Dano Mágico cada (com base no Estágio) ao alvo ao longo de 8s."
+  },
+  {
+    "nome": "Especialista em Ataque",
+    "descricao": "Recebe 5% de Dano de Ataque. Todas as outras origens de Dano de Ataque concedem 30% a mais."
+  },
+  {
+    "nome": "Fonte de Força",
+    "descricao": "No início do combate e a cada 3s, recebe 1 de Regeneração de Mana."
+  },
+  {
+    "nome": "Forma final",
+    "descricao": "Após a rodada 5-2, se este Campeão estiver com 3 Estrelas, ele ficará com 4 Estrelas."
+  },
+  {
+    "nome": "Fúria Crescente",
+    "descricao": "Ataques concedem @ASPerAttack*100@% de Velocidade de Ataque cumulativa."
+  },
+  {
+    "nome": "Mago",
+    "descricao": "Conjura Habilidades duas vezes, mas causa 25% a menos de dano total."
+  },
+  {
+    "nome": "Toque de Midas",
+    "descricao": "Ataques e habilidades executam inimigos com menos de 10% de Vida. Abates têm 25% de chance de conceder ouro."
+  },
+  {
+    "nome": "Alento Solar",
+    "descricao": "A cada 2s, aplica Queimadura e Ferimento ao inimigo sem Queimadura mais próximo por 10s. Causa 10% a mais de dano a inimigos com Queimadura."
+  },
+  {
+    "nome": "Arco do Herói",
+    "descricao": "Recebe 4.5% de Amplificação de Dano por nível de jogador. No nível 10, recebe mais 35% de Amplificação de Dano."
+  },
+  {
+    "nome": "Dando Chapéu",
+    "descricao": "Recebe 20% de Dano de Ataque e de Poder de Habilidade. A cada eliminação, recebe um chapéu que concede 0.5% de cada. Ao morrer, perde 50% dos seus chapéus. (Chapéus atuais: X)."
+  },
+  {
+    "nome": "Perfura-céu",
+    "descricao": "Causar dano aplica 30% de Fragmentação e Fatiamento nos inimigos por 6s. Causa 8% a mais de dano contra inimigos afetados por Fragmentação e Fatiamento."
+  },
+  {
+    "nome": "Surto do Ciclone",
+    "descricao": "Recebe Velocidade de Ataque. No início do combate, desabilita o inimigo do lado oposto por 3s.\n\n(1) 15% .\n\n(2) 25% . Desabilita dois inimigos."
+  },
+  {
+    "nome": "Comum",
+    "descricao": "Se este Campeão não tiver características ativas, receberá 300-800 de Vida e 20-65% de Velocidade de Ataque (com base no Estágio atual)."
+  },
+  {
+    "nome": "Muralha Viva",
+    "descricao": "Recebe 20 de Armadura e Resistência Mágica. No início do combate, aliados na fileira de trás recebem 1% de Velocidade de Ataque para cada 30  e  combinados que este Campeão tem."
+  },
+  {
+    "nome": "Ataque Duplo",
+    "descricao": "Ataques têm 25% de chance de acionar um ataque adicional."
+  },
+  {
+    "nome": "Desperado",
+    "descricao": "A cada 12 ataques, dispara cinco projéteis nos inimigos mais próximos, causando 120% do Dano de Ataque Básico como Dano Físico."
+  },
+  {
+    "nome": "Espada Espiritual",
+    "descricao": "Recebe 20% de Chance de Acerto Crítico. Ataques que forem Acertos Críticos causarão 40% de Dano Mágico adicional."
+  },
+  {
+    "nome": "Hiperativo",
+    "descricao": "Eliminações concedem 90% de Velocidade de Ataque que decai rapidamente ao longo de 3s."
+  },
+  {
+    "nome": "Kahunahuna",
+    "descricao": "A cada 6 ataques, causa 215 () de Dano Verdadeiro."
+  },
+  {
+    "nome": "Lâmina Dourada",
+    "descricao": "Atacar 85 vezes concede 1 de ouro. O ouro aumenta em 1 cada vez que o efeito é acionado. (Ataques: X/85)"
+  },
+  {
+    "nome": "Porradeiro",
+    "descricao": "Ataques e habilidades ignoram 35% da Armadura do inimigo."
+  },
+  {
+    "nome": "Mais de 8.000",
+    "descricao": "No início de cada rodada, recebe um atributo adicional aleatório permanente.\n\nAtual: +X , +X , +X , +X , +X , +X , +X"
+  },
+  {
+    "nome": "Toque Congelado",
+    "descricao": "(1) Ataques têm 15% de chance de Atordoar o alvo por 1s.\n\n(2) Esses ataques causam 55 de Dano Mágico adicional por Estágio."
+  },
+  {
+    "nome": "Velocidade Máxima",
+    "descricao": "Recebe 8% de Velocidade de Ataque e também 1% permanentemente a cada 3 eliminações. (Atual: X )"
+  },
+  {
+    "nome": "Hemorragia",
+    "descricao": "Habilidades causam 60% de dano adicional como Dano Verdadeiro ao longo de 4s."
+  },
+  {
+    "nome": "Soul Fighter N.º 1",
+    "descricao": "Se este Campeão for o único Soul Fighter em campo, ele receberá os efeitos de Soul Fighter (4)."
+  },
+  {
+    "nome": "Dobrador de Tempestades",
+    "descricao": "(1) Invoca uma tempestade que ecoa 25% do dano causado como Dano Mágico.\n\n(2) Ambos os Campeões contribuem para o dano. A tempestade fica maior."
+  },
+  {
+    "nome": "Precisão",
+    "descricao": "Altera a Velocidade de Ataque para 70. Converte 1% de Velocidade de Ataque em 0.8% de Dano de Ataque. Ataques causam 130% a mais de dano e concedem 10 a mais de Mana."
+  },
+  {
+    "nome": "Grande Ascensão",
+    "descricao": "Ascende mais uma vez, uma no nível 7 e outra no nível 10.\n\nNível 7: recebe 5% de Poder de Habilidade a cada 3 ataques.\nNível 10: dispara 2 ondas adicionais que causam 55% de dano."
+  },
+  {
+    "nome": "Arcana Superior",
+    "descricao": "Recebe 20% de Poder de Habilidade e 1% permanente a cada 2 eliminações. (Atual: X )"
+  },
+  {
+    "nome": "Impulso 66",
+    "descricao": "Recebe 15% de Velocidade de Ataque e 10% de Poder de Habilidade. Esse valor dobra após 15 e 66 ataques. (Ataques: X)"
+  },
+  {
+    "nome": "Especialista em Magia",
+    "descricao": "Recebe 10% de Poder de Habilidade. Todas as outras origens de Poder de Habilidade concedem 30% a mais."
+  },
+  {
+    "nome": "Olhar Aguçado",
+    "descricao": "Ataques e habilidades ignoram 40% da Resistência Mágica do inimigo."
+  },
+  {
+    "nome": "Triturador de Alma",
+    "descricao": "Causar Dano Mágico reduz a Resistência Mágica em 4 pelo resto do combate."
+  },
+  {
+    "nome": "Centelha Forte",
+    "descricao": "A cada 3s, dá um choque no inimigo mais próximo, causando 9% da Vida máxima dele como Dano Mágico. Sempre que um inimigo é Atordoado por qualquer motivo, dá um choque nele."
+  },
+  {
+    "nome": "Coração Puro",
+    "descricao": "A cada 4s, cura este Campeão e aliados em até 2 casas adjacentes em 18% da Vida perdida deles."
+  },
+  {
+    "nome": "Supremacia",
+    "descricao": "Enquanto este Campeão for a Célula Suprema, ele executará inimigos com menos de 18% de Vida."
+  },
+  {
+    "nome": "Perseguição",
+    "descricao": "A Habilidade de Lucian avança, dispara +1 projéteis adicionais e concede 5 de Poder de Habilidade pelo resto do combate."
+  },
+  {
+    "nome": "Robô Ranger",
+    "descricao": "Recebe 35% do Dano de Ataque e do Poder de Habilidade do Poderoso Mech, além de 10% da Vida dele."
+  },
+  {
+    "nome": "Instinto Assassino",
+    "descricao": "Habilidades alvejam o inimigo com a Vida mais baixa dentro do alcance. Recebe 3 de Regeneração de Mana."
+  },
+  {
+    "nome": "Tiroteio",
+    "descricao": "Dispara +35% de projéteis com habilidades."
+  },
+  {
+    "nome": "Cuidador",
+    "descricao": "Ao conjurar, o aliado com a menor porcentagem de Vida recebe 120 () de Escudo por 6s."
+  },
+  {
+    "nome": "Demolidor",
+    "descricao": "O dano de habilidade Atordoa por 1s."
+  },
+  {
+    "nome": "Ás do Espaço",
+    "descricao": "O dano causado por este Campeão contribui com +@Percent*100@% para o lançamento de foguetes da Tripulação."
+  },
+  {
+    "nome": "Tática da Matilha",
+    "descricao": "Recebe 2 companheiros da matilha que causam 15% () de Dano Físico. Quando Naafiri usa a Habilidade, a matilha avança até o inimigo com a Vida mais baixa em até 2 casas de distância."
+  },
+  {
+    "nome": "Chefão",
+    "descricao": "Recebe 10% de Vampirismo Universal. Sempre que um aliado morre, recebe 4% de Amplificação de Dano cumulativa."
+  },
+  {
+    "nome": "Finalista",
+    "descricao": "Recebe 12% de Amplificação de Dano e 8% de Redução de Dano, aumentado em 2%  e 2%  por cada jogador eliminado."
+  },
+  {
+    "nome": "Hoje não!",
+    "descricao": "Após este Campeão morrer 8x, ele receberá 25% de Vida, 10% de Vampirismo Universal e 25% de Amplificação de Dano. (Mortes: X)"
+  },
+  {
+    "nome": "Aquecimento",
+    "descricao": "Recebe 48 de Armadura e Resistência Mágica no início do combate ou quando ativa este efeito. A cada segundo, converte 3 resistências em 3% de Dano de Ataque. (Até 48)"
+  },
+  {
+    "nome": "Caçando Emoções",
+    "descricao": "(1) Abates curam 15% da Vida máxima e concedem 40% de Velocidade de Ataque por 2s.\n\n(2) 40%  ao abater. Executará inimigos que tiverem menos de 10% de Vida."
+  },
+  {
+    "nome": "Inabalável",
+    "descricao": "Recebe 15% de Vampirismo Universal e imunidade a Controle de Grupo pelos primeiros 15s de combate."
+  },
+  {
+    "nome": "Terrorzinho",
+    "descricao": "Recebe 12% de Velocidade de Ataque. Com 50% de Vida, dobra o valor pelo resto do combate. Em seguida, encolhe por 4s, esquivando-se de todos os ataques."
+  },
+  {
+    "nome": "100 Flexões",
+    "descricao": "Recebe 15% de Redução de Dano. Receberá 1% de Amplificação de Dano permanente a cada 3 atualizações em que você gastar ouro. (Atual: X )"
+  },
+  {
+    "nome": "Dança da Fusão",
+    "descricao": "No início do combate, funde-se com o aliado mais próximo, recebendo 45% da Vida, do Dano de Ataque e do Poder de Habilidade dele."
+  },
+  {
+    "nome": "No Limite",
+    "descricao": "Começa o combate com 65% de Vida, mas recebe 35% de Amplificação de Dano."
+  },
+  {
+    "nome": "Pesos",
+    "descricao": "Recebe 10 pesos. Com 1+, move-se e ataca 50% mais devagar. Vitórias contra jogadores retiram 1 peso(s); derrotas retiram 2. Sem pesos, move-se mais rápido e recebe 60% de Velocidade de Ataque e 18% de Redução de Dano. (Pesos restantes: 10)"
+  },
+  {
+    "nome": "Assassinato",
+    "descricao": "(1) Início do combate: pula na retaguarda inimiga, causando 20% a menos de dano nos primeiros 8s de combate.\n\n(2) Ambos os Campeões pulam."
+  },
+  {
+    "nome": "Corrompido",
+    "descricao": "Começa dormente. Recebe 4.5% de Amplificação de Dano e 80 de Vida sempre que qualquer unidade morre. Com 60% de Vida, desperta e teleporta-se na direção dos inimigos, Atordoando-os por 1.5s."
+  },
+  {
+    "nome": "Marinheira Estelar",
+    "descricao": "(1) Recebe 25% de efeitos aumentados das Guardiãs Estelares.\n\n(2) E cura a outra Marinheira Estelar em 15% do dano causado."
+  },
+  {
+    "nome": "Caos Crescente",
+    "descricao": "Ao conjurar, dispara um orbe adicional que causa 6% de dano a um inimigo aleatório. Conjurações seguintes disparam um orbe adicional."
+  },
+  {
+    "nome": "Coração de Ouro",
+    "descricao": "Se o Campeão sobreviver a um combate entre jogadores, receberá 2 de ouro."
+  },
+  {
+    "nome": "Trapaceiro",
+    "descricao": "(1) Com a Vida baixa, recebe 8% de Amplificação de Dano, faz surgir um Boneco de Treinamento e avança até o inimigo mais distante.\n\n(2) 12% ; Bonecos recebem 1250 ."
+  },
+  {
+    "nome": "Véu Carmesim",
+    "descricao": "Recebe 20% de Vampirismo Universal. Converte a Sobrecura do Vampirismo Universal em Escudo. (Máximo: 40% de Vida)"
+  },
+  {
+    "nome": "Braços Alongados",
+    "descricao": "Recebe 10% de Velocidade de Ataque. Recebe +1 de Alcance de Ataque com eliminações."
+  },
+  {
+    "nome": "Eficiente",
+    "descricao": "Conjurar habilidades custa 20 a menos de Mana."
+  },
+  {
+    "nome": "Melhor Defesa",
+    "descricao": "Ao conceder ou receber Escudos, 150% do valor do Escudo será adicionado como Dano Físico adicional ao seu próximo ataque."
+  },
+  {
+    "nome": "Aniquilação",
+    "descricao": "Recebe 12% de Amplificação de Dano, aumentada para 28% depois da primeira eliminação a cada combate."
+  },
+  {
+    "nome": "Nocaute Artístico",
+    "descricao": "Cada 4º ataque causa 40% a mais de dano. O dano excedente é causado ao inimigo mais próximo."
+  },
+  {
+    "nome": "Amuleto Sombrio",
+    "descricao": "Cura em 15% do Dano Mágico causado. Ao conjurar, sofre 8% da Vida máxima como Dano Verdadeiro, mas recebe 12 de Poder de Habilidade cumulativo."
+  },
+  {
+    "nome": "Ataque Impulsivo",
+    "descricao": "Ao trocar de alvo, teleporta-se para o próximo. O próximo ataque causa 175% a mais como Dano Mágico."
+  },
+  {
+    "nome": "Fã do Mozão",
+    "descricao": "Xayah e Rakan recebem atributos adicionais com base no nível de estrela um do outro.\n\n(1) 10%  | 180 , 12 \n\n(2) 12%  | 250 , 15"
+  },
+  {
+    "nome": "Manter a União",
+    "descricao": "As habilidades de Shen também concedem 40% do Escudo dele ao aliado com a Vida mais baixa, e ele recebe 10 de Resistência Mágica cumulativa ao conjurar."
+  },
+  {
+    "nome": "Pancada Certeira",
+    "descricao": "O primeiro ataque contra cada inimigo causa 175% () de Dano Físico e Atordoa por 1s."
+  },
+  {
+    "nome": "Bom Garoto!",
+    "descricao": "A cada 5s, Lulu dá um lanche ao monstro dela: 13%  de Cura para Rammus, 12% de Dano de Ataque para Smolder ou 12% de Poder de Habilidade para Kog'Maw."
+  },
+  {
+    "nome": "Petisco Raro",
+    "descricao": "Seu Monstro recebe +15 níveis de Treinador de Monstro."
+  },
+  {
+    "nome": "Laminado",
+    "descricao": "Ataques causam 20% do Dano de Ataque Básico como Dano Físico aos inimigos no Alcance de Ataque do alvo."
+  },
+  {
+    "nome": "Irmãos de Sangue",
+    "descricao": "O dano causado por Yone e Yasuo faz com que inimigos sangrem em 20% do dano causado ao longo de 2s."
+  },
+  {
+    "nome": "Surto de Mana",
+    "descricao": "Começa o combate com a barra de Mana cheia."
+  },
+  {
+    "nome": "Forma Irrestrita",
+    "descricao": "No início do combate, entra na Forma Irrestrita, recebendo 20% de Redução de Dano e 50% de Dano de Ataque. A Vida não decai mais durante a Forma Irrestrita."
+  },
+  {
+    "nome": "Dobrador de Gelo",
+    "descricao": "Início do combate: Ryze fica congelado nos primeiros 3s de combate. A Habilidade dele causa 20% de Congelamento por 4s e causa 20% de dano adicional a inimigos adjacentes ao alvo."
+  },
+  {
+    "nome": "Ponto-Cruz",
+    "descricao": "A cada 1ª e 2ª conjuração, lança 2 agulhas adicionais que causam 50% do dano."
+  },
+  {
+    "nome": "Ultrapostura",
+    "descricao": "Recebe 100 de Vida e concede +1 à característica da Postura selecionada."
+  },
+  {
+    "nome": "Bateria Mental",
+    "descricao": "A primeira conjuração de cada combate concede 5 de Regeneração de Mana e 30% de Poder de Habilidade."
+  },
+  {
+    "nome": "Barragem da Destruição",
+    "descricao": "Flechas custam 2 a menos de Mana durante a Habilidade de Varus."
+  },
+  {
+    "nome": "Florescência Extra",
+    "descricao": "Recebe uma planta adicional. Plantas causam 20% a menos de dano e têm 30% a menos de Vida."
+  },
+  {
+    "nome": "Mechador",
+    "descricao": "Quando você coloca em campo O Poderoso Mech e Luchador, O Poderoso Mech ganha 100 de Vida e se torna um Luchador, concedendo +1 à característica."
+  }
+]

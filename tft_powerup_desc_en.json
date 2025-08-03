@@ -1,0 +1,454 @@
+[
+  {
+    "nome": "Adaptive Skin",
+    "descricao": "When taking damage, gain 1 Armor or 6 Magic Resistance based on the damage type, up to 55 total resists."
+  },
+  {
+    "nome": "Body Change",
+    "descricao": "At combat start, take the form of the nearest ally, granting them and this champion a 30% Health shield."
+  },
+  {
+    "nome": "Colossal",
+    "descricao": "Take up two unit slots. Gain Health, Durability, and Damage Amp.\n\n(1) 1000 ; 20% ; 10% .\n\n(2) 1400 ; 25% ; 30% ."
+  },
+  {
+    "nome": "Corrosive",
+    "descricao": "30% Shred and Sunder enemies within 2 hexes. Take 10% less damage from Shredded or Sundered enemies."
+  },
+  {
+    "nome": "Inner Fire",
+    "descricao": "Every 2 seconds, Burn and Wound the closest non-Burning enemy for 10 seconds. Take 15% less damage from Burning enemies."
+  },
+  {
+    "nome": "Max Vitality",
+    "descricao": "At combat start gain 35 permanent Health. Every 10 seconds this champion survives, gain 10 additional permanent Health.\n\n(Current: X )"
+  },
+  {
+    "nome": "Regenerative",
+    "descricao": "Heal 6.5% max Health every 3 seconds. Gain 10% increased healing from all sources."
+  },
+  {
+    "nome": "Resistant",
+    "descricao": "Reduce each instance of incoming damage by 30."
+  },
+  {
+    "nome": "Round Two",
+    "descricao": "On death, summon a Training Dummy equipped with the same items. It has 85% of this unit's health."
+  },
+  {
+    "nome": "Selfish",
+    "descricao": "Gain 10% Durability. Heal for 5% of damage dealt by all other allies."
+  },
+  {
+    "nome": "Singularity",
+    "descricao": "Become a 2-hex singularity, dealing 1% () as magic damage every second. When enemies die within the radius, gain 8 permanent Health."
+  },
+  {
+    "nome": "Stand Alone",
+    "descricao": "If this champion starts combat alone in its row, gain 35% Health."
+  },
+  {
+    "nome": "Tank-zilla",
+    "descricao": "Gain 20% max Health and grow larger. After 15 seconds, Stun all enemies for 1.5 seconds."
+  },
+  {
+    "nome": "Atomic",
+    "descricao": "Store 10% max Health at combat start and 2% more every second. On death, deal the stored Health as magic damage in a large radius."
+  },
+  {
+    "nome": "Hungry Hero",
+    "descricao": "Gain 100 Health and 8% Attack Damage. Each round, you may pay 3 player health for 75  and 3 ."
+  },
+  {
+    "nome": "Mech Pilot",
+    "descricao": "(1) Pilot the Mech, granting it your stats: 50% , 100% . Eject when at 50%.\n\n(2) The Mech benefits from the pilots' traits."
+  },
+  {
+    "nome": "Socialite",
+    "descricao": "Combat start: Mark adjacent hexes for 3 rounds. Allies in marked hexes gain 12% Damage Amp and 200 Health. This champion gains 200% of the bonus."
+  },
+  {
+    "nome": "Spiky Shell",
+    "descricao": "Gain 40 Armor. Enemies attacking this champion take 25 + 5 per stage physical damage. (1 second cooldown per attacker)"
+  },
+  {
+    "nome": "Unstoppable",
+    "descricao": "Gain 300 Health and immunity to crowd control. Charge to new targets, Stunning enemies passed through for 1 seconds."
+  },
+  {
+    "nome": "Star Student",
+    "descricao": "(1) Gain 200 Health and +40% Potential \n\n(2) Gain 1 XP per round, and another 1 for each surviving Star Student."
+  },
+  {
+    "nome": "Classy",
+    "descricao": "This champion's last-listed trait is 40% more effective on them."
+  },
+  {
+    "nome": "Gather Force",
+    "descricao": "On cast, gain stacking Attack Damage equal to 40% of Mana spent."
+  },
+  {
+    "nome": "Super Genius",
+    "descricao": "Every 1.5 seconds gain Ability Power equal to your Mana Regen."
+  },
+  {
+    "nome": "Attack Expert",
+    "descricao": "Gain 5% Attack Damage. All other sources of Attack Damage give 30% more."
+  },
+  {
+    "nome": "Critical Threat",
+    "descricao": "Abilities can Critically Strike. Every 3 seconds, gain 5% Critical Strike Chance."
+  },
+  {
+    "nome": "Essence Share",
+    "descricao": "On cast, the 2 nearest allies gain 25% of Mana spent."
+  },
+  {
+    "nome": "Fairy Tail",
+    "descricao": "On cast spawn 2 fairies that each deal 80-200 (based on Stage) magic damage to the target over the next 8 seconds."
+  },
+  {
+    "nome": "Final Form",
+    "descricao": "After round 5-2 if this champion is 3-star, become 4-star at combat start."
+  },
+  {
+    "nome": "Mage",
+    "descricao": "Cast Abilities twice, but deal 25% less total damage."
+  },
+  {
+    "nome": "Max Attack",
+    "descricao": "Gain 12% Attack Damage, and permanently gain 1% every 2 takedowns. (Current: X )"
+  },
+  {
+    "nome": "Power Font",
+    "descricao": "At combat start and every 3 seconds, gain 1 Mana Regen."
+  },
+  {
+    "nome": "Ramping Rage",
+    "descricao": "Attacks grant @ASPerAttack*100@% stacking Attack Speed."
+  },
+  {
+    "nome": "Shadow Clone",
+    "descricao": "Create a perfect copy of this champion with the same items equipped that deals 25% damage."
+  },
+  {
+    "nome": "Midas Touch",
+    "descricao": "Attacks and Abilities execute enemies below 10% Health. Kills have a 25% chance to drop a gold."
+  },
+  {
+    "nome": "Cyclone Rush",
+    "descricao": "Gain Attack Speed. At combat start, disable the opposite enemy for 3 seconds.\n\n(1) 15% .\n\n(2) 25% . Disable two enemies."
+  },
+  {
+    "nome": "Hat Trick",
+    "descricao": "Gain 20% Attack Damage and Ability Power. Each takedown, don a hat that grants 0.5% of each. On death, lose 50% of your hats. (Current Hats: X)"
+  },
+  {
+    "nome": "Hero's Arc",
+    "descricao": "Gain 4.5% Damage Amp per player level. At level 10 gain an additional 35% Damage Amp."
+  },
+  {
+    "nome": "Sky Piercer",
+    "descricao": "Damage 30% Shreds and Sunders enemies for 6 seconds. Deal 8% increased damage against Shredded and Sundered enemies."
+  },
+  {
+    "nome": "Solar Breath",
+    "descricao": "Every 2 seconds, Burn and Wound the closest non-Burning enemy for 10 seconds. Deal 10% more damage to Burning enemies."
+  },
+  {
+    "nome": "Ordinary",
+    "descricao": "If this champion has no active traits, gain 300-800 Health and 20-65% Attack Speed (based on current Stage)."
+  },
+  {
+    "nome": "Living Wall",
+    "descricao": "Gain 20 Armor and Magic Resistance. At combat start allies in the back row gain 1% Attack Speed for every 30 combined  and  this champion has."
+  },
+  {
+    "nome": "Bludgeoner",
+    "descricao": "Attacks and Abilities ignore 35% of enemy's Armor."
+  },
+  {
+    "nome": "Desperado",
+    "descricao": "After every 12th attack, fire five projectiles at the closest enemies that deal 120% of Basic Attack Damage as physical damage."
+  },
+  {
+    "nome": "Doublestrike",
+    "descricao": "Attacks have a 25% chance to trigger an additional attack."
+  },
+  {
+    "nome": "Golden Edge",
+    "descricao": "Attacking 85 times grants 1 gold. This gold value increases by 1 each time it activates. (Attacks: X / 85)"
+  },
+  {
+    "nome": "Hyperactive",
+    "descricao": "Takedowns grant 90% Attack Speed that rapidly decays over 3 seconds."
+  },
+  {
+    "nome": "Kahunahuna",
+    "descricao": "Every 6 attacks, deal 215 () true damage."
+  },
+  {
+    "nome": "Spirit Sword",
+    "descricao": "Gain 20% Critical Strike Chance. Attacks that critically strike deal 40% bonus magic damage."
+  },
+  {
+    "nome": "Frost Touch",
+    "descricao": "(1) Attacks have a 15% chance to Stun the target for 1 seconds.\n\n(2) These attacks deal 55 bonus magic damage per Stage."
+  },
+  {
+    "nome": "Over 9000",
+    "descricao": "At the start of each round, gain a random permanent stat bonus.\n\nCurrent: +X , +X , +X , +X , +X , +X , +X"
+  },
+  {
+    "nome": "Max Speed",
+    "descricao": "Gain 8% Attack Speed, and permanently gain 1% every 3 takedowns. (Current: X )"
+  },
+  {
+    "nome": "Hemorrhage",
+    "descricao": "Abilities deal 60% bonus damage as true damage over 4 seconds."
+  },
+  {
+    "nome": "S.O.L.E. Fighter",
+    "descricao": "If this champion is the only Soul Fighter fielded, it gains the benefits of Soul Fighter (4)."
+  },
+  {
+    "nome": "Precision",
+    "descricao": "Set Attack Speed to 70. Convert 1% Attack Speed to 0.8% Attack Damage. Attacks deal 130% more damage and grant 10 more Mana."
+  },
+  {
+    "nome": "Storm Bender",
+    "descricao": "(1) Summon a storm that echoes 25% of damage dealt as magic damage.\n\n(2) Both champions contribute damage. The storm is bigger."
+  },
+  {
+    "nome": "Final Ascent",
+    "descricao": "Ascend an additional time at levels 7 and 10.\n\nLevel 7: Gain 5% Ability Power every 3 attacks.\nLevel 10: Launch 2 additional waves that deal 55% damage."
+  },
+  {
+    "nome": "Max Arcana",
+    "descricao": "Gain 20% Ability Power, and permanently gain 1% every 2 takedowns. (Current: X )"
+  },
+  {
+    "nome": "Surge 66",
+    "descricao": "Gain 15% Attack Speed and 10% Ability Power. After 15 and 66 attacks, this amount doubles. (Attacks: X)"
+  },
+  {
+    "nome": "Keen Eye",
+    "descricao": "Attacks and Abilities ignore 40% of enemy's Magic Resistance."
+  },
+  {
+    "nome": "Magic Expert",
+    "descricao": "Gain 10% Ability Power. All other sources of Ability Power give 30% more."
+  },
+  {
+    "nome": "Soul Chipper",
+    "descricao": "Dealing magic damage reduces Magic Resistance by 4 for the rest of combat."
+  },
+  {
+    "nome": "Strong Spark",
+    "descricao": "Every 3 seconds, zap the closest enemy for 9% of their max Health as magic damage. Whenever an enemy is Stunned by any source, zap them."
+  },
+  {
+    "nome": "Pure Heart",
+    "descricao": "Every 4 seconds heal this champion and allies within 2-hexes for 18% of their missing Health."
+  },
+  {
+    "nome": "Supremacy",
+    "descricao": "While this champion is the Supreme Cell, they execute enemies under 18% Health instead."
+  },
+  {
+    "nome": "Pursuit",
+    "descricao": "Lucian's Ability dashes, fires +1 additional bullets, and grants 5 Ability Power for the rest of combat."
+  },
+  {
+    "nome": "Robo Ranger",
+    "descricao": "Gain 35% of The Mighty Mech's Attack Damage and Ability Power, and 10% of its Health."
+  },
+  {
+    "nome": "Bullet Hell",
+    "descricao": "Fire 35% more projectiles with abilities."
+  },
+  {
+    "nome": "Killer Instinct",
+    "descricao": "Abilities target the lowest Health enemy in range instead. Gain 3 Mana Regen."
+  },
+  {
+    "nome": "Caretaker",
+    "descricao": "On cast, the lowest percent Health ally gains 120 () shield for 6 seconds."
+  },
+  {
+    "nome": "Demolitionist",
+    "descricao": "Ability damage Stuns for 1 second."
+  },
+  {
+    "nome": "Space Ace",
+    "descricao": "Damage this champion deals contributes @Percent*100@% more towards launching rockets from The Crew's ship."
+  },
+  {
+    "nome": "Pack Tactics",
+    "descricao": "Gain 2 packmates that deal 15% () physical damage. When Naafiri uses her Ability, packmates dash to the lowest Health enemy within 2 hexes."
+  },
+  {
+    "nome": "Final Boss",
+    "descricao": "Gain 10% Omnivamp. Whenever an ally dies, gain 4% stacking Damage Amp."
+  },
+  {
+    "nome": "Finalist",
+    "descricao": "Gain 12% Damage Amp and 8% Damage Reduction, increased by 2%  and 2%  for each eliminated player."
+  },
+  {
+    "nome": "Not Done Yet",
+    "descricao": "Once this champion has died 8 times, gain 25% Health, 10% Omnivamp, and 25% Damage Amp. (Deaths: X)"
+  },
+  {
+    "nome": "Thrillseeker",
+    "descricao": "(1) Kills heal 15% max Health and grant 40% Attack Speed for 2 seconds.\n\n(2) 40%  on kill. Execute enemies below 10% Health."
+  },
+  {
+    "nome": "Tiny Terror",
+    "descricao": "Gain 12% Attack Speed. At 50% Health, double it for the rest of combat. Then, shrink in size for 4 seconds, dodging all attacks."
+  },
+  {
+    "nome": "Unflinching",
+    "descricao": "Gain 15% Omnivamp and immunity to crowd control for the first 15 seconds of combat."
+  },
+  {
+    "nome": "Warming Up",
+    "descricao": "At combat start or when this activates gain 48 Armor and Magic Resistance. Every second, convert 3 resists into 3% Attack Damage. (Up to 48)"
+  },
+  {
+    "nome": "100 Push Ups",
+    "descricao": "Gain 15% Damage Reduction. For every 3 rerolls you spend gold on, gain 1% permanent Damage Amp. (Current: X )"
+  },
+  {
+    "nome": "Fusion Dance",
+    "descricao": "At combat start, fuse with the nearest ally, gaining 45% of their Health, Attack Damage, and Ability Power."
+  },
+  {
+    "nome": "On The Edge",
+    "descricao": "Start combat at 65% Health, but gain 35% Damage Amp."
+  },
+  {
+    "nome": "Weights",
+    "descricao": "Gain 10 Weights. At 1+, move and attack 50% slower. Player victories drop 1 Weights, 2 on a loss. At 0, move faster and gain 60% Attack Speed and 18% Damage Reduction. (Weights Left: 10)"
+  },
+  {
+    "nome": "Assassinate",
+    "descricao": "(1) Combat Start: Jump into the enemy's backline and deal 20% less damage for the first 8 seconds of combat.\n\n(2) Both champions jump."
+  },
+  {
+    "nome": "Corrupted",
+    "descricao": "Start dormant. Gain 4.5% Damage Amp and 80 Health whenever any unit dies. At 60% Health, awaken and blink toward enemies, stunning them for 1.5 seconds."
+  },
+  {
+    "nome": "Star Sailor",
+    "descricao": "(1) Gain 25% increased bonuses from Star Guardian.\n\n(2) And heal the other Star Sailor for 15% of damage dealt."
+  },
+  {
+    "nome": "Rising Chaos",
+    "descricao": "On cast, fire an additional orb that deals 6% damage to a random enemy. Subsequent casts add an additional orb."
+  },
+  {
+    "nome": "Heart of Gold",
+    "descricao": "If this champion survives a player combat, gain 2 gold."
+  },
+  {
+    "nome": "Trickster",
+    "descricao": "(1) At low Health, gain 8% Damage Amp, spawn a Training Dummy, and dash to the furthest enemy.\n\n(2) 12% ; Dummies gain 1250"
+  },
+  {
+    "nome": "Crimson Veil",
+    "descricao": "Gain 20% Omnivamp. Overhealing from Omnivamp converts to shield. (Max: 40% Health)"
+  },
+  {
+    "nome": "Stretchy Arms",
+    "descricao": "Gain 10% Attack Speed. On takedown, gain +1 Attack Range."
+  },
+  {
+    "nome": "Best Defense",
+    "descricao": "When granting or receiving shields, add 150% of the shield's value as bonus physical damage on the next attack."
+  },
+  {
+    "nome": "Efficient",
+    "descricao": "Abilities cost 20 less Mana to cast."
+  },
+  {
+    "nome": "Annihilation",
+    "descricao": "Gain 12% Damage Amp, increased to 28% Damage Amp after the first takedown each combat."
+  },
+  {
+    "nome": "Artistic KO",
+    "descricao": "Every 4th attack deals 40% more damage. Overkill damage bounces to the nearest enemy."
+  },
+  {
+    "nome": "Blink Attack",
+    "descricao": "When switching targets, blink to the next target. The next attack deals 175% more as magic damage."
+  },
+  {
+    "nome": "Dark Amulet",
+    "descricao": "Heal for 15% of magic damage dealt. On cast, take 8% max Health as true damage, but gain 12 stacking Ability Power."
+  },
+  {
+    "nome": "Fan Service",
+    "descricao": "Xayah and Rakan gain bonus stats based on each other's star level.\n\n(1) 10%  | 180 , 12 \n\n(2) 12%  | 250 , 15"
+  },
+  {
+    "nome": "Stand United",
+    "descricao": "Shen's ability also shields the lowest health ally for 40% of his shield and gains 10 stacking Magic Resist on cast."
+  },
+  {
+    "nome": "Serious Slam",
+    "descricao": "The first attack on each enemy deals 175% () physical damage and Stuns for 1 seconds."
+  },
+  {
+    "nome": "Bestest Boy",
+    "descricao": "Every 5 seconds, Lulu feeds a snack to her Monster: 13%  Healing for Rammus, 12% Attack Damage for Smolder, or 12% Ability Power for Kog'Maw."
+  },
+  {
+    "nome": "Rare Treat",
+    "descricao": "Your Monster has +15 Monster Trainer levels."
+  },
+  {
+    "nome": "Bladenado",
+    "descricao": "Attacks deal 20% of Basic Attack Damage as physical damage to enemies within attack range of the target."
+  },
+  {
+    "nome": "Blood Brothers",
+    "descricao": "Damage dealt by Yone and Yasuo bleeds enemies for 20% of damage dealt over 2 seconds."
+  },
+  {
+    "nome": "Mana Rush",
+    "descricao": "Start combat with full Mana."
+  },
+  {
+    "nome": "All Out",
+    "descricao": "At combat start go ALL OUT, gaining 20% Damage Reduction and 50% Attack Damage. Health no longer decays while ALL OUT."
+  },
+  {
+    "nome": "Ice Bender",
+    "descricao": "Combat Start: Ryze is frozen for the first 3 seconds of combat. His Ability 20% Chills enemies for 4 seconds, and deals 20% bonus damage to enemies adjacent to the target."
+  },
+  {
+    "nome": "Needlework",
+    "descricao": "Fire 2 bonus needles with every 1st and 2nd cast that deal 50% damage."
+  },
+  {
+    "nome": "Ultra Stance",
+    "descricao": "Gain 100 Health and grant an additional +1 to the selected Stance's trait."
+  },
+  {
+    "nome": "Mind Battery",
+    "descricao": "The first cast each combat grants 5 Mana Regen and 30% Ability Power."
+  },
+  {
+    "nome": "Doom Barrage",
+    "descricao": "Arrows cost 2 less Mana during Varus's Ability."
+  },
+  {
+    "nome": "Bonus Bloom",
+    "descricao": "Gain an additional plant. Plants deal 20% less damage and have 30% less Health."
+  },
+  {
+    "nome": "Mechador",
+    "descricao": "When you field Mighty Mech and Luchador, The Mighty Mech gains 100 Health and becomes a Luchador granting +1 to the trait."
+  }
+]
