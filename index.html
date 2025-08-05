@@ -679,7 +679,7 @@
       
       setTimeout(() => {
         const candidatos = data
-          .filter(c => c.champion !== alvoNome)
+          .filter(c => c.champion !== alvoNome && !c.champion.includes('[H]'))
           .map(c => {
             const comum = c.powerups.filter(p => poolAlvo.has(p.toLowerCase()));
             const possuiFruta = c.powerups.some(p => p.toLowerCase() === frutaDesejada);
@@ -755,3 +755,4 @@
 </html>
 
 </html>
+
