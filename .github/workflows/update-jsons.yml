@@ -1,0 +1,40 @@
+name: Atualizar JSONs Powerup
+
+on:
+  workflow_dispatch:  # permite rodar manualmente
+  schedule:
+    - cron: '0 * * * *'  # executa a cada hora
+
+jobs:
+  scrape-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependências
+        run: npm install puppeteer node-fetch
+
+      - name: Rodar scrapers (pt)
+        run: |
+          node scripts/gerar_frutas.js pt
+          node scripts/gerar_descricao.js pt
+          node scripts/gerar_ranking.js pt
+
+      - name: Rodar scrapers (en)
+        run: |
+          node scripts/gerar_frutas.js en
+          node scripts/gerar_descricao.js en
+          node scripts/gerar_ranking.js en
+
+      - name: Enviar para Gist
+        env:
+          GIST_UPLOAD_TOKEN: ${{ secrets.GIST_UPLOAD_TOKEN }}
+          GIST_ID: ${{ secrets.GIST_ID }}
+        run: node scripts/upload_gist.js
