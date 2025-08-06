@@ -6,76 +6,117 @@
   <title>TFT Powerup Optimizer</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --bg-color: #f9f9f9;
+      --text-color: #333;
+      --container-bg: white;
+      --border-color: #ddd;
+      --primary-color: #3498db;
+      --primary-hover: #2980b9;
+      --error-color: #e74c3c;
+      --success-color: #27ae60;
+      --highlight-color: #e67e22;
+      --sidebar-bg: #f9f9f9;
+      --powerup-info-bg: #e8f4fc;
+    }
+
+    .dark-mode {
+      --bg-color: #1a1a1a;
+      --text-color: #f0f0f0;
+      --container-bg: #2d2d2d;
+      --border-color: #444;
+      --primary-color: #2980b9;
+      --primary-hover: #3498db;
+      --error-color: #ff6b6b;
+      --success-color: #2ecc71;
+      --highlight-color: #f39c12;
+      --sidebar-bg: #2d2d2d;
+      --powerup-info-bg: #1e3a56;
+    }
+
     body { 
       font-family: 'Segoe UI', Arial, sans-serif; 
       padding: 20px; 
       max-width: 1200px; 
       margin: auto; 
       line-height: 1.6;
-      color: #333;
+      color: var(--text-color);
+      background-color: var(--bg-color);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
     }
+
     h2 { 
-      color: #2c3e50;
+      color: var(--primary-color);
       text-align: center;
       margin-bottom: 10px;
     }
+
     .credits {
       text-align: center;
       font-size: 12px;
       color: #7f8c8d;
       margin-bottom: 25px;
     }
+
     .main-content {
       display: flex;
       gap: 20px;
       flex: 1;
     }
+
     .container {
-      background-color: #f9f9f9;
+      background-color: var(--container-bg);
       border-radius: 8px;
       padding: 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       flex: 2;
+      transition: background-color 0.3s;
     }
+
     .sidebar {
       flex: 1;
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
-    .info-panel {
-      background-color: #f9f9f9;
+
+    .info-panel, .favorites-panel {
+      background-color: var(--sidebar-bg);
       border-radius: 8px;
       padding: 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
     }
+
     .favorites-panel {
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       max-height: 500px;
       overflow-y: auto;
     }
+
     label { 
       margin: 15px 0 5px;
       font-weight: bold;
-      color: #2c3e50;
+      color: var(--primary-color);
     }
+
     select, input, button { 
       padding: 10px;
-      border: 1px solid #ddd;
+      border: 1px solid var(--border-color);
       border-radius: 4px;
       margin-bottom: 15px;
       width: 100%;
       box-sizing: border-box;
       font-size: 16px;
+      background-color: var(--container-bg);
+      color: var(--text-color);
+      transition: all 0.3s;
     }
+
     button {
-      background-color: #3498db;
+      background-color: var(--primary-color);
       color: white;
       border: none;
       cursor: pointer;
@@ -84,30 +125,37 @@
       margin-top: 20px;
       padding: 12px;
     }
+
     button:hover {
-      background-color: #2980b9;
+      background-color: var(--primary-hover);
     }
+
     button:disabled {
       background-color: #95a5a6;
       cursor: not-allowed;
     }
+
     ul { 
       padding-left: 0;
       list-style-type: none;
     }
+
     li { 
       margin-bottom: 10px;
       padding: 10px;
-      background-color: white;
+      background-color: var(--container-bg);
       border-radius: 4px;
-      border-left: 4px solid #3498db;
+      border-left: 4px solid var(--primary-color);
+      transition: background-color 0.3s;
     }
+
     .champion-icon {
       width: 32px;
       height: 32px;
       border-radius: 50%;
       object-fit: cover;
     }
+
     .favorite-btn {
       background: none;
       border: none;
@@ -118,77 +166,99 @@
       margin-left: auto;
       transition: color 0.3s;
     }
+
     .favorite-btn:hover {
       color: #ff6b6b;
     }
+
     .favorite-btn.favorited {
       color: #ff6b6b;
     }
+
     .loading {
       text-align: center;
       color: #7f8c8d;
       font-style: italic;
     }
+
     .error {
-      color: #e74c3c;
+      color: var(--error-color);
       font-weight: bold;
     }
+
     .success {
-      color: #27ae60;
+      color: var(--success-color);
     }
+
     .highlight {
       font-weight: bold;
-      color: #e67e22;
+      color: var(--highlight-color);
     }
+
     .powerup-info {
       margin-top: 20px;
     }
+
     .powerup-info h3 {
       margin-top: 0;
-      color: #2c3e50;
+      color: var(--primary-color);
     }
+
     .powerup-description {
       padding: 15px;
-      background-color: #e8f4fc;
+      background-color: var(--powerup-info-bg);
       border-radius: 4px;
+      transition: background-color 0.3s;
     }
+
     .favorite-group {
       margin-bottom: 15px;
-      border: 1px solid #ddd;
+      border: 1px solid var(--border-color);
       border-radius: 8px;
       overflow: hidden;
+      transition: border-color 0.3s;
     }
+
     .favorite-group-header {
-      background-color: #3498db;
+      background-color: var(--primary-color);
       color: white;
       padding: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transition: background-color 0.3s;
     }
+
     .favorite-group-header-content {
       display: flex;
       align-items: baseline;
       gap: 8px;
     }
+
     .favorite-group-header strong,
     .favorite-group-header span {
       line-height: 1;
       vertical-align: baseline;
     }
+
     .favorite-group-content {
       padding: 10px;
-      background-color: white;
+      background-color: var(--container-bg);
+      transition: background-color 0.3s;
     }
+
     .favorite-group-item {
       display: flex;
       align-items: center;
       padding: 8px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid var(--border-color);
+      transition: border-color 0.3s;
     }
+
     .favorite-group-item:last-child {
       border-bottom: none;
     }
+
     .group-remove-btn {
       background: none;
       border: none;
@@ -197,105 +267,233 @@
       margin-left: 10px;
       padding: 0 5px;
     }
+
     .item-remove-btn {
       background: none;
       border: none;
-      color: #e74c3c;
+      color: var(--error-color);
       cursor: pointer;
       margin-left: auto;
       padding: 2px 5px;
     }
+
     .favorites-title {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 15px;
     }
+
     .clear-favorites {
       background: none;
       border: none;
-      color: #e74c3c;
+      color: var(--error-color);
       cursor: pointer;
       font-size: 14px;
     }
- @media (max-width: 1024px) {
-  .main-content {
-    flex-direction: column;
-    gap: 40px;
-  }
 
-  .container,
-  .sidebar {
-    flex: unset;
-    width: 100%;
-  }
+    .powerup-tier {
+      width: 20px;
+      height: 20px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
 
-  .container {
-    order: 1;
-  }
+    .powerup-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-  .sidebar {
-    order: 2;
-  }
+    .powerup-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
 
-  .favorites-panel,
-  .info-panel {
-    max-height: none;
-    overflow: visible;
-  }
-}
+    .powerup-icon {
+      width: 40px;
+      height: 40px;
+    }
 
-@media (max-width: 600px) {
-  body {
-    padding: 10px;
-  }
+    .powerup-tier-badge {
+      width: 30px;
+      height: 30px;
+    }
 
-  h2 {
-    font-size: 22px;
-  }
+    .tier-s {
+      color: #ff3333;
+    }
+    .tier-a {
+      color: #ff9933;
+    }
+    .tier-b {
+      color: #ffcc33;
+    }
+    .tier-c {
+      color: #66ccff;
+    }
+    .tier-d {
+      color: #cccccc;
+    }
 
-  label,
-  select,
-  input,
-  button {
-    font-size: 15px;
-  }
+    option[data-tier="S"] {
+      background-color: rgba(255, 50, 50, 0.1);
+    }
+    option[data-tier="A"] {
+      background-color: rgba(255, 150, 50, 0.1);
+    }
+    option[data-tier="B"] {
+      background-color: rgba(255, 255, 50, 0.1);
+    }
+    option[data-tier="C"] {
+      background-color: rgba(100, 200, 255, 0.1);
+    }
+    option[data-tier="D"] {
+      background-color: rgba(200, 200, 200, 0.1);
+    }
 
-  .champion-icon {
-    width: 28px;
-    height: 28px;
-  }
+    .header-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+    }
 
-  .favorite-btn {
-    font-size: 16px;
-  }
+    .theme-toggle {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
 
-  .favorite-group-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
+    .lang-select-wrapper {
+      background-color: var(--container-bg);
+      border-radius: 20px;
+      padding: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
 
-  .favorite-group-item {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-}
+    .lang-select {
+      padding: 5px 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 15px;
+      background-color: var(--container-bg);
+      color: var(--text-color);
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1024px) {
+      .main-content {
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .container,
+      .sidebar {
+        flex: unset;
+        width: 100%;
+      }
+
+      .container {
+        order: 1;
+      }
+
+      .sidebar {
+        order: 2;
+      }
+
+      .favorites-panel,
+      .info-panel {
+        max-height: none;
+        overflow: visible;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      label,
+      select,
+      input,
+      button {
+        font-size: 15px;
+      }
+
+      .champion-icon {
+        width: 28px;
+        height: 28px;
+      }
+
+      .favorite-btn {
+        font-size: 16px;
+      }
+
+      .favorite-group-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+
+      .favorite-group-item {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .header-controls {
+        top: 10px;
+        right: 10px;
+      }
+
+      .theme-toggle {
+        width: 35px;
+        height: 35px;
+      }
+
+      .lang-select {
+        padding: 5px 8px;
+        font-size: 13px;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="header-controls">
+    <div class="lang-select-wrapper">
+      <select class="lang-select" id="langSelect">
+        <option value="pt">PT</option>
+        <option value="en">EN</option>
+      </select>
+    </div>
+    <button class="theme-toggle" id="themeToggle">
+      <i class="fas fa-moon"></i>
+    </button>
+  </div>
+
   <h2>TFT Powerup Optimizer</h2>
   <div class="credits">by decarstes</div>
 
   <div class="main-content">
     <div class="container">
-      <label for="langSelect">Idioma / Language:</label>
-      <select id="langSelect">
-        <option value="pt">Português</option>
-        <option value="en">English</option>
-      </select>
-
       <label for="championSelect">Champion:</label>
       <select id="championSelect" disabled>
         <option value="">Loading champions...</option>
@@ -318,7 +516,11 @@
       <div class="info-panel">
         <h3>Powerup Information</h3>
         <div class="powerup-info" id="powerupInfo" style="display: none;">
-          <h4 id="powerupName"></h4>
+          <div class="powerup-header">
+            <img src="https://cdn.metatft.com/cdn-cgi/image/width=40,height=40,format=auto/https://cdn.metatft.com/file/metatft/set15/PowerUp_Item_Consumable.png" alt="Powerup" class="powerup-icon">
+            <h4 id="powerupName"></h4>
+            <img id="powerupTierBadge" src="" alt="Tier" class="powerup-tier-badge" style="display: none;">
+          </div>
           <div class="powerup-description" id="powerupDescription"></div>
         </div>
       </div>
@@ -340,7 +542,9 @@
     let currentLanguage = 'pt';
     let championData = {};
     let powerupDescriptions = {};
+    let powerupRankings = {};
     let favorites = JSON.parse(localStorage.getItem('tft_favorites')) || [];
+    let darkMode = localStorage.getItem('darkMode') === 'true';
 
     const champSelect = document.getElementById("championSelect");
     const powerupSelect = document.getElementById("powerupSelect");
@@ -350,7 +554,30 @@
     const powerupInfo = document.getElementById("powerupInfo");
     const powerupName = document.getElementById("powerupName");
     const powerupDescription = document.getElementById("powerupDescription");
+    const powerupTierBadge = document.getElementById("powerupTierBadge");
     const favoritesList = document.getElementById("favoritesList");
+    const themeToggle = document.getElementById("themeToggle");
+
+    // Inicializa o tema
+    function initTheme() {
+      if (darkMode) {
+        document.body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        document.body.classList.remove('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    // Alternar tema
+    themeToggle.addEventListener('click', () => {
+      darkMode = !darkMode;
+      localStorage.setItem('darkMode', darkMode);
+      initTheme();
+    });
+
+    // Inicializa o tema ao carregar
+    initTheme();
 
     function formatChampionNameForIcon(championName) {
       return championName
@@ -366,12 +593,34 @@
       return `https://cdn.metatft.com/cdn-cgi/image/width=48,height=48,format=auto/https://cdn.metatft.com/file/metatft/champions/tft15_${formattedName}.png`;
     }
 
+    function getTierIcon(tier) {
+      const tierIcons = {
+        'S': 'https://blitz-cdn-plain.blitz.gg/blitz/ui/icons/tier-icon/tier-s.svg',
+        'A': 'https://blitz-cdn-plain.blitz.gg/blitz/ui/icons/tier-icon/tier-a.svg',
+        'B': 'https://blitz-cdn-plain.blitz.gg/blitz/ui/icons/tier-icon/tier-b.svg',
+        'C': 'https://blitz-cdn-plain.blitz.gg/blitz/ui/icons/tier-icon/tier-c.svg',
+        'D': 'https://blitz-cdn-plain.blitz.gg/blitz/ui/icons/tier-icon/tier-d.svg'
+      };
+      return tierIcons[tier] || '';
+    }
+
     function showLoading() {
       resultList.innerHTML = '<li class="loading">Loading data...</li>';
     }
 
     function showError(message) {
       resultList.innerHTML = `<li class="error">${message}</li>`;
+    }
+
+    async function loadPowerupRankings() {
+      try {
+        const response = await fetch(`./tft_powerup_ranking_${currentLanguage}.json?${new Date().getTime()}`);
+        if (!response.ok) throw new Error('Failed to load powerup rankings');
+        powerupRankings = await response.json();
+      } catch (error) {
+        console.error("Error loading powerup rankings:", error);
+        powerupRankings = [];
+      }
     }
 
     async function carregarDados() {
@@ -381,7 +630,8 @@
       try {
         const [championsResponse, descriptionsResponse] = await Promise.all([
           fetch(`./tft_powerups_${currentLanguage}.json?${new Date().getTime()}`),
-          fetch(`./tft_powerup_desc_${currentLanguage}.json?${new Date().getTime()}`)
+          fetch(`./tft_powerup_desc_${currentLanguage}.json?${new Date().getTime()}`),
+          loadPowerupRankings()
         ]);
         
         if (!championsResponse.ok) throw new Error(`HTTP error! status: ${championsResponse.status}`);
@@ -397,7 +647,8 @@
         
         loadedDescriptions.forEach(desc => {
           powerupDescriptions[desc.nome || desc.name] = {
-            description: desc.descricao || desc.description
+            description: desc.descricao || desc.description,
+            tier: desc.tier || 'D'
           };
         });
         
@@ -447,19 +698,40 @@
       }
     }
 
-    function atualizarFrutas() {
+    async function atualizarFrutas() {
       const selectedChampion = champSelect.value;
       const champion = championData[selectedChampion];
       
       powerupSelect.innerHTML = "";
       
       if (champion) {
-        const sortedPowerups = [...champion.powerups].sort((a, b) => a.localeCompare(b));
+        await loadPowerupRankings();
+        
+        const sortedPowerups = [...champion.powerups].sort((a, b) => {
+          const tierA = (powerupRankings.find(p => p.nome === a) || {}).tier || 'D';
+          const tierB = (powerupRankings.find(p => p.nome === b) || {}).tier || 'D';
+          
+          const tierOrder = { 'S': 0, 'A': 1, 'B': 2, 'C': 3, 'D': 4 };
+          
+          if (tierOrder[tierA] !== tierOrder[tierB]) {
+            return tierOrder[tierA] - tierOrder[tierB];
+          }
+          return a.localeCompare(b);
+        });
         
         sortedPowerups.forEach(p => {
           const opt = document.createElement("option");
           opt.value = p;
-          opt.textContent = p;
+          
+          const powerupRank = powerupRankings.find(item => item.nome === p);
+          const tier = powerupRank ? powerupRank.tier : null;
+          
+          opt.innerHTML = p;
+          
+          if (tier) {
+            opt.dataset.tier = tier;
+          }
+          
           powerupSelect.appendChild(opt);
         });
         
@@ -478,6 +750,22 @@
       if (selectedPowerup && powerupDescriptions[selectedPowerup]) {
         powerupName.textContent = selectedPowerup;
         powerupDescription.textContent = powerupDescriptions[selectedPowerup].description;
+        
+        // Atualizar tier badge
+        const powerupRank = powerupRankings.find(item => item.nome === selectedPowerup);
+        const tier = powerupRank ? powerupRank.tier : null;
+        
+        if (tier) {
+          powerupTierBadge.src = getTierIcon(tier);
+          powerupTierBadge.alt = `Tier ${tier}`;
+          powerupTierBadge.title = `Tier ${tier}`;
+          powerupTierBadge.style.display = 'inline';
+          powerupName.className = `tier-${tier.toLowerCase()}`;
+        } else {
+          powerupTierBadge.style.display = 'none';
+          powerupName.className = '';
+        }
+        
         powerupInfo.style.display = 'block';
       } else {
         powerupInfo.style.display = 'none';
@@ -753,6 +1041,3 @@
   </script>
 </body>
 </html>
-
-</html>
-
