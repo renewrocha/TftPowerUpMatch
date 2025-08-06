@@ -4,8 +4,10 @@ const fs = require('fs');
 const lang = process.argv[2] || 'pt';
 const URL = 'https://www.metatft.com/tables/powerups';
 
-(async () => {
-  const browser = await puppeteer.launch({ headless: "new" });
+(async () => {const browser = await puppeteer.launch({
+  args: ['--no-sandbox'],
+  headless: 'new'
+});
   const page = await browser.newPage();
 
   await page.goto(URL, { waitUntil: 'networkidle2' });
@@ -62,3 +64,4 @@ const URL = 'https://www.metatft.com/tables/powerups';
   console.log(`✅ Arquivo gerado: tft_powerups_${lang}.json`);
   await browser.close();
 })();
+
