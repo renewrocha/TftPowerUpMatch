@@ -538,6 +538,8 @@
   </div>
 
   <script>
+    const GIST_BASE_URL = 'https://gist.githubusercontent.com/renewrocha/8bb6c5b1157871e6618ff4c1681c269b/raw/';
+    
     let data = [];
     let currentLanguage = 'pt';
     let championData = {};
@@ -614,7 +616,7 @@
 
     async function loadPowerupRankings() {
       try {
-        const response = await fetch(`./tft_powerup_ranking_${currentLanguage}.json?${new Date().getTime()}`);
+        const response = await fetch(`${GIST_BASE_URL}tft_powerup_ranking_${currentLanguage}.json?${Date.now()}`);
         if (!response.ok) throw new Error('Failed to load powerup rankings');
         powerupRankings = await response.json();
       } catch (error) {
@@ -629,8 +631,8 @@
       
       try {
         const [championsResponse, descriptionsResponse] = await Promise.all([
-          fetch(`./tft_powerups_${currentLanguage}.json?${new Date().getTime()}`),
-          fetch(`./tft_powerup_desc_${currentLanguage}.json?${new Date().getTime()}`),
+          fetch(`${GIST_BASE_URL}tft_powerups_${currentLanguage}.json?${Date.now()}`),
+          fetch(`${GIST_BASE_URL}tft_powerup_desc_${currentLanguage}.json?${Date.now()}`),
           loadPowerupRankings()
         ]);
         
