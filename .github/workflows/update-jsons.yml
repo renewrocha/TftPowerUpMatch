@@ -10,16 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout do repositório
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
+      - name: Criar package.json
+        run: |
+          echo '{
+            "type": "module",
+            "dependencies": {
+              "puppeteer": "^22.4.1",
+              "node-fetch": "^3.3.2"
+            }
+          }' > package.json
+
       - name: Instalar dependências
-        run: npm install puppeteer node-fetch
+        run: npm install
 
       - name: Rodar scrapers (pt)
         run: |
