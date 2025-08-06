@@ -5,7 +5,10 @@ const lang = process.argv[2] || 'pt';
 const URL = 'https://www.metatft.com/powerups';
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: "new" });
+  const browser = await puppeteer.launch({
+  args: ['--no-sandbox'],
+  headless: 'new'
+});
   const page = await browser.newPage();
 
   await page.goto(URL, { waitUntil: 'networkidle2' });
@@ -48,3 +51,4 @@ const URL = 'https://www.metatft.com/powerups';
   console.log(`✅ Arquivo gerado: tft_powerup_ranking_${lang}.json`);
   await browser.close();
 })();
+
