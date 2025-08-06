@@ -537,8 +537,9 @@
     </div>
   </div>
 
-  <script>
+<script>
     const GIST_BASE_URL = 'https://gist.githubusercontent.com/renewrocha/8bb6c5b1157871e6618ff4c1681c269b/raw/';
+    const CACHE_DURATION = 30 * 60 * 1000; // 30 minutos de cache
     
     let data = [];
     let currentLanguage = 'pt';
@@ -547,7 +548,9 @@
     let powerupRankings = {};
     let favorites = JSON.parse(localStorage.getItem('tft_favorites')) || [];
     let darkMode = localStorage.getItem('darkMode') === 'true';
+    let preloadedData = {};
 
+    // Elementos DOM
     const champSelect = document.getElementById("championSelect");
     const powerupSelect = document.getElementById("powerupSelect");
     const resultList = document.getElementById("resultList");
@@ -560,26 +563,224 @@
     const favoritesList = document.getElementById("favoritesList");
     const themeToggle = document.getElementById("themeToggle");
 
-    // Inicializa o tema
-    function initTheme() {
-      if (darkMode) {
-        document.body.classList.add('dark-mode');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-      } else {
-        document.body.classList.remove('dark-mode');
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    // Configuração do IndexedDB
+    const openDB = () => {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open('TFT_Powerup_Optimizer_DB', 1);
+        
+        request.onupgradeneeded = (event) => {
+          const db = event.target.result;
+          if (!db.objectStoreNames.contains('dataCache')) {
+            db.createObjectStore('dataCache', { keyPath: 'url' });
+          }
+        };
+        
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+    };
+
+    const getCachedData = async (url, ignoreExpiration = false) => {
+      try {
+        const db = await openDB();
+        return new Promise((resolve) => {
+          const transaction = db.transaction('dataCache', 'readonly');
+          const store = transaction.objectStore('dataCache');
+          const request = store.get(url);
+          
+          request.onsuccess = () => {
+            const result = request.result;
+            if (result && (ignoreExpiration || (Date.now() - result.timestamp < CACHE_DURATION))) {
+              resolve(result.data);
+            } else {
+              resolve(null);
+            }
+          };
+          request.onerror = () => resolve(null);
+        });
+      } catch {
+        return null;
+      }
+    };
+
+    const cacheData = async (url, data) => {
+      try {
+        const db = await openDB();
+        return new Promise((resolve) => {
+          const transaction = db.transaction('dataCache', 'readwrite');
+          const store = transaction.objectStore('dataCache');
+          store.put({ url, data, timestamp: Date.now() });
+          transaction.oncomplete = () => resolve();
+        });
+      } catch (error) {
+        console.error('Cache error:', error);
+      }
+    };
+
+    async function fetchWithCache(url) {
+      // 1. Tentar obter do cache primeiro (se dentro da validade)
+      const cached = await getCachedData(url);
+      
+      // 2. Buscar da rede em paralelo
+      const networkFetch = fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          return response.json();
+        })
+        .then(data => {
+          cacheData(url, data);
+          return data;
+        })
+        .catch(error => {
+          console.error('Network fetch failed:', error);
+          return null;
+        });
+
+      // 3. Se tiver cache válido, retornar imediatamente e atualizar em background
+      if (cached) {
+        networkFetch.then(data => {
+          if (data) console.log('Data updated in background');
+        });
+        return cached;
+      }
+      
+      // 4. Se não tiver cache válido, aguardar a rede
+      const data = await networkFetch;
+      if (data) return data;
+      
+      // 5. Se a rede falhar e tiver cache expirado, usar mesmo assim
+      const expiredCache = await getCachedData(url, true);
+      if (expiredCache) {
+        console.warn('Using expired cache as fallback');
+        return expiredCache;
+      }
+      
+      throw new Error('Failed to load data and no cache available');
+    }
+
+    async function carregarTodosDados(lang) {
+      try {
+        const [powerupsData, descriptionsData, rankingsData] = await Promise.all([
+          fetchWithCache(`${GIST_BASE_URL}tft_powerups_${lang}.json?${Date.now()}`),
+          fetchWithCache(`${GIST_BASE_URL}tft_powerup_desc_${lang}.json?${Date.now()}`),
+          fetchWithCache(`${GIST_BASE_URL}tft_powerup_ranking_${lang}.json?${Date.now()}`)
+        ]);
+        
+        return { powerupsData, descriptionsData, rankingsData };
+      } catch (error) {
+        console.error("Error loading all data:", error);
+        throw error;
       }
     }
 
-    // Alternar tema
-    themeToggle.addEventListener('click', () => {
-      darkMode = !darkMode;
-      localStorage.setItem('darkMode', darkMode);
-      initTheme();
-    });
+    async function preloadOtherLanguage() {
+      const otherLang = currentLanguage === 'pt' ? 'en' : 'pt';
+      try {
+        const { powerupsData, descriptionsData, rankingsData } = await carregarTodosDados(otherLang);
+        preloadedData[otherLang] = {
+          powerupsData,
+          descriptionsData,
+          rankingsData
+        };
+        console.log(`Pré-carregamento de ${otherLang} completo`);
+      } catch (error) {
+        console.error(`Falha no pré-carregamento de ${otherLang}:`, error);
+      }
+    }
 
-    // Inicializa o tema ao carregar
-    initTheme();
+    function processData(powerupsData, descriptionsData, rankingsData) {
+      data = powerupsData;
+      powerupRankings = rankingsData;
+      
+      powerupDescriptions = {};
+      descriptionsData.forEach(desc => {
+        powerupDescriptions[desc.nome || desc.name] = {
+          description: desc.descricao || desc.description,
+          tier: desc.tier || 'D'
+        };
+      });
+      
+      championData = {};
+      data.forEach(entry => {
+        championData[entry.champion] = {
+          powerups: entry.powerups,
+        };
+      });
+      
+      preencherCampeoes();
+      updateFavoritesList();
+      
+      if (!preloadedData[currentLanguage === 'pt' ? 'en' : 'pt']) {
+        preloadOtherLanguage();
+      }
+    }
+
+    async function carregarDados() {
+      showLoading();
+      currentLanguage = langSelect.value;
+      
+      if (preloadedData[currentLanguage]) {
+        console.log('Usando dados pré-carregados');
+        const { powerupsData, descriptionsData, rankingsData } = preloadedData[currentLanguage];
+        processData(powerupsData, descriptionsData, rankingsData);
+        return;
+      }
+      
+      try {
+        const { powerupsData, descriptionsData, rankingsData } = await carregarTodosDados(currentLanguage);
+        processData(powerupsData, descriptionsData, rankingsData);
+      } catch (error) {
+        console.error("Error loading file:", error);
+        showError(currentLanguage === 'pt' 
+          ? "Erro ao carregar os dados. Por favor, tente recarregar a página." 
+          : "Error loading data. Please try reloading the page.");
+      }
+    }
+
+    function setupAutoRefresh() {
+      setInterval(async () => {
+        console.log('Verificando atualizações...');
+        const lang = currentLanguage;
+        try {
+          const { powerupsData, descriptionsData, rankingsData } = await carregarTodosDados(lang);
+          
+          if (JSON.stringify(powerupsData) !== JSON.stringify(data)) {
+            console.log('Dados atualizados encontrados');
+            data = powerupsData;
+            powerupRankings = rankingsData;
+            
+            powerupDescriptions = {};
+            descriptionsData.forEach(desc => {
+              powerupDescriptions[desc.nome || desc.name] = {
+                description: desc.descricao || desc.description,
+                tier: desc.tier || 'D'
+              };
+            });
+            
+            championData = {};
+            data.forEach(entry => {
+              championData[entry.champion] = {
+                powerups: entry.powerups,
+              };
+            });
+            
+            if (champSelect.value) {
+              atualizarFrutas();
+            }
+          }
+        } catch (error) {
+          console.error('Erro na atualização automática:', error);
+        }
+      }, 30 * 60 * 1000); // 30 minutos
+    }
+
+    function showLoading() {
+      resultList.innerHTML = '<li class="loading">Loading data...</li>';
+    }
+
+    function showError(message) {
+      resultList.innerHTML = `<li class="error">${message}</li>`;
+    }
 
     function formatChampionNameForIcon(championName) {
       return championName
@@ -604,71 +805,6 @@
         'D': 'https://blitz-cdn-plain.blitz.gg/blitz/ui/icons/tier-icon/tier-d.svg'
       };
       return tierIcons[tier] || '';
-    }
-
-    function showLoading() {
-      resultList.innerHTML = '<li class="loading">Loading data...</li>';
-    }
-
-    function showError(message) {
-      resultList.innerHTML = `<li class="error">${message}</li>`;
-    }
-
-    async function loadPowerupRankings() {
-      try {
-        const response = await fetch(`${GIST_BASE_URL}tft_powerup_ranking_${currentLanguage}.json?${Date.now()}`);
-        if (!response.ok) throw new Error('Failed to load powerup rankings');
-        powerupRankings = await response.json();
-      } catch (error) {
-        console.error("Error loading powerup rankings:", error);
-        powerupRankings = [];
-      }
-    }
-
-    async function carregarDados() {
-      showLoading();
-      currentLanguage = langSelect.value;
-      
-      try {
-        const [championsResponse, descriptionsResponse] = await Promise.all([
-          fetch(`${GIST_BASE_URL}tft_powerups_${currentLanguage}.json?${Date.now()}`),
-          fetch(`${GIST_BASE_URL}tft_powerup_desc_${currentLanguage}.json?${Date.now()}`),
-          loadPowerupRankings()
-        ]);
-        
-        if (!championsResponse.ok) throw new Error(`HTTP error! status: ${championsResponse.status}`);
-        if (!descriptionsResponse.ok) throw new Error(`HTTP error! status: ${descriptionsResponse.status}`);
-        
-        const [loadedData, loadedDescriptions] = await Promise.all([
-          championsResponse.json(),
-          descriptionsResponse.json()
-        ]);
-        
-        data = loadedData;
-        powerupDescriptions = {};
-        
-        loadedDescriptions.forEach(desc => {
-          powerupDescriptions[desc.nome || desc.name] = {
-            description: desc.descricao || desc.description,
-            tier: desc.tier || 'D'
-          };
-        });
-        
-        championData = {};
-        data.forEach(entry => {
-          championData[entry.champion] = {
-            powerups: entry.powerups,
-          };
-        });
-        
-        preencherCampeoes();
-        updateFavoritesList();
-      } catch (error) {
-        console.error("Error loading file:", error);
-        showError(currentLanguage === 'pt' 
-          ? "Erro ao carregar os dados. Por favor, tente recarregar a página." 
-          : "Error loading data. Please try reloading the page.");
-      }
     }
 
     function preencherCampeoes() {
@@ -700,15 +836,13 @@
       }
     }
 
-    async function atualizarFrutas() {
+    function atualizarFrutas() {
       const selectedChampion = champSelect.value;
       const champion = championData[selectedChampion];
       
       powerupSelect.innerHTML = "";
       
       if (champion) {
-        await loadPowerupRankings();
-        
         const sortedPowerups = [...champion.powerups].sort((a, b) => {
           const tierA = (powerupRankings.find(p => p.nome === a) || {}).tier || 'D';
           const tierB = (powerupRankings.find(p => p.nome === b) || {}).tier || 'D';
@@ -753,7 +887,6 @@
         powerupName.textContent = selectedPowerup;
         powerupDescription.textContent = powerupDescriptions[selectedPowerup].description;
         
-        // Atualizar tier badge
         const powerupRank = powerupRankings.find(item => item.nome === selectedPowerup);
         const tier = powerupRank ? powerupRank.tier : null;
         
@@ -807,17 +940,6 @@
         localStorage.setItem('tft_favorites', JSON.stringify(favorites));
         updateFavoritesList();
       }
-    }
-
-    function loadFavoriteCombo(favorite) {
-      champSelect.value = favorite.target;
-      champSelect.dispatchEvent(new Event('change'));
-      
-      setTimeout(() => {
-        powerupSelect.value = favorite.powerup;
-        powerupSelect.dispatchEvent(new Event('change'));
-        analisar();
-      }, 100);
     }
 
     function updateFavoritesList() {
@@ -1033,13 +1155,34 @@
       });
     }
 
+    // Inicializa o tema
+    function initTheme() {
+      if (darkMode) {
+        document.body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        document.body.classList.remove('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    // Alternar tema
+    themeToggle.addEventListener('click', () => {
+      darkMode = !darkMode;
+      localStorage.setItem('darkMode', darkMode);
+      initTheme();
+    });
+
     // Event listeners
     langSelect.addEventListener("change", carregarDados);
     champSelect.addEventListener("change", atualizarFrutas);
     powerupSelect.addEventListener("change", updatePowerupInfo);
     
-    // Carregamento inicial
-    document.addEventListener('DOMContentLoaded', carregarDados);
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      carregarDados().then(setupAutoRefresh);
+    });
   </script>
 </body>
 </html>
