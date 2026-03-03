@@ -1,32 +1,30 @@
-TFT PowerUp Match
+# TFT PowerUp Match
 
-Ferramenta para analisar Powerups do TFT e identificar quais campeões podem usar um determinado Powerup, com suporte a PT-BR e EN.
+Ferramenta para **analisar Powerups do TFT** e identificar **quais campeões podem usar um determinado Powerup**, com suporte a **PT-BR** e **EN**.
 
 O projeto combina:
 
-Frontend estático (index.html) para consulta/análise
+- **Frontend estático (`index.html`)** para consulta/análise
+- **Scrapers em Node.js + Puppeteer** para coletar dados do MetaTFT
+- **JSONs gerados automaticamente** (PT/EN)
+- **GitHub Actions** para atualização recorrente e envio para **Gist**
 
-Scrapers em Node.js + Puppeteer para coletar dados do MetaTFT
+---
 
-JSONs gerados automaticamente (PT/EN)
+## ✨ Funcionalidades
 
-GitHub Actions para atualização recorrente e envio para Gist
+- Seleção de **campeão** e **powerup**
+- Sugestão de **melhores campeões para usar antes** (análise no frontend)
+- Exibição de **informações do powerup** (nome/descrição)
+- **Favoritos** no navegador
+- Suporte a **idiomas PT / EN**
+- Pipeline automatizado para manter os JSONs atualizados
 
-✨ Funcionalidades
+---
 
-Seleção de campeão e powerup
+## 🧱 Estrutura do projeto
 
-Sugestão de melhores campeões para usar antes (análise no frontend)
-
-Exibição de informações do powerup (nome/descrição)
-
-Favoritos no navegador
-
-Suporte a idiomas PT / EN
-
-Pipeline automatizado para manter os JSONs atualizados
-
-🧱 Estrutura do projeto
+```bash
 TftPowerUpMatch/
 ├── .github/workflows/
 │   └── update-jsons.yml          # automação (scrape + gist)
@@ -41,25 +39,3 @@ TftPowerUpMatch/
 ├── tft_powerups_en.json
 ├── tft_powerup_desc_pt.json
 └── tft_powerup_desc_en.json
-
-Observação: os scripts também geram tft_powerup_ranking_pt.json e tft_powerup_ranking_en.json (quando executados), usados no fluxo de automação.
-
-⚙️ Tecnologias usadas
-
-HTML + JavaScript (frontend)
-
-Node.js (CommonJS)
-
-Puppeteer (scraping)
-
-node-fetch (integração com API do GitHub/Gist)
-
-GitHub Actions (automação)
-
-📦 Requisitos
-
-Node.js 18+ (recomendado Node 20)
-
-npm
-
-Acesso à internet (para ler dados do MetaTFT)
